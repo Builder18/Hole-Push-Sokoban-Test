@@ -114,6 +114,6 @@ DelayUntil(C,GameBarLoad);
 //Check everything loaded properly after 10 seconds
 function NotAllLoaded(){
 	if(!CC()||puzzlescriptModules.map(function(m){return !precedences[m]()}).some(Identity))
-		alert("Not all game bar modules loaded properly. Please file an issue at: https://github.com/pedropsi/game-bar-source/issues");
+		alert("Not all game bar modules loaded properly. Please allow pedropsi.github.io on your script blocker.");
 }
 setTimeout(NotAllLoaded,10000);
