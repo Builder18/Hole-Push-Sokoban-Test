@@ -9,12 +9,12 @@ var b3 = "none";
 var b4 = "none";
 var b5 = "none";
 var para;
-var buttons = 1;
-var btn1;
-var btn2;
-var btn3;
-var btn4;
-var btn5;
+var buttonsCount = 1; // How many buttons.
+var btn1 = document.createElement("BUTTON");   // Create a <button> element
+var btn2 = document.createElement("BUTTON");
+var btn3 = document.createElement("BUTTON");
+var btn4 = document.createElement("BUTTON");
+var btn5 = document.createElement("BUTTON");
 var answer = "none";
 
 var start = function(){
@@ -27,7 +27,6 @@ var start = function(){
 	document.body.appendChild(document.createElement("br")); // Linebreaks
 	document.body.appendChild(document.createElement("br"));
 	
-	btn1 = document.createElement("BUTTON");   // Create a <button> element
 	btn1.innerHTML = "A";                   // Insert text
 	btn1.id ='btn1';
 	document.body.appendChild(btn1);               // Append <button> to <body>
@@ -35,7 +34,6 @@ var start = function(){
 		//input = b1;
 		//score();
 	});
-	btn2 = document.createElement("BUTTON");   // Create a <button> element
 	btn2.innerHTML = "B";                   // Insert text
 	btn2.id ='btn2';
 	document.body.appendChild(btn2);               // Append <button> to <body>
@@ -43,7 +41,6 @@ var start = function(){
 		//input = b2;
 		//score();
 	});
-	btn3 = document.createElement("BUTTON");   // Create a <button> element
 	btn3.innerHTML = "C";                   // Insert text
 	btn3.id ='btn3';
 	document.body.appendChild(btn3);               // Append <button> to <body>
@@ -51,7 +48,6 @@ var start = function(){
 		//input = b3;
 		//score();
 	});
-	btn4 = document.createElement("BUTTON");   // Create a <button> element
 	btn4.innerHTML = "D";                   // Insert text
 	btn4.id ='btn4';
 	document.body.appendChild(btn4);               // Append <button> to <body>
@@ -59,7 +55,6 @@ var start = function(){
 		//input = b4;
 		//score();
 	});
-	btn5 = document.createElement("BUTTON");   // Create a <button> element
 	btn5.innerHTML = "E";                   // Insert text
 	btn5.id ='btn5';
 	document.body.appendChild(btn5);               // Append <button> to <body>
@@ -69,9 +64,9 @@ var start = function(){
 	});
 	//hide start button and show other ones here
 	question = "Image goes here!";
-	answer = "Answer goes here!";
-	b1 = "Answer goes here!";
-	buttons = 1;
+	answer = "Pacman";
+	b1 = "Pacman";
+	buttonsCount = 1;
 	buttons();
 	//ask();
 }
@@ -82,37 +77,53 @@ var start = function(){
 };*/
 
 var buttons = function(){
-	if(buttons = 1){
+	if(buttonsCount == 1){
 		btn1.innerHTML = "A: " + b1;
 		btn2.style.display = "none";
 		btn3.style.display = "none";
 		btn4.style.display = "none";
 		btn5.style.display = "none";
 	}
-	if(buttons = 2){
+	if(buttonsCount == 2){
+		btn1.innerHTML = "A: " + b1;
 		btn2.style.display = "inline";
+		btn2.innerHTML = "B: " + b2;
 		btn3.style.display = "none";
 		btn4.style.display = "none";
 		btn5.style.display = "none";
 	}
-	if(buttons = 3){
+	if(buttonsCount == 3){
+		btn1.innerHTML = "A: " + b1;
 		btn2.style.display = "inline";
+		btn2.innerHTML = "B: " + b2;
 		btn3.style.display = "inline";
+		btn3.innerHTML = "C: " + b3;
 		btn4.style.display = "none";
 		btn5.style.display = "none";
 	}
-	if(buttons = 4){
+	if(buttonsCount == 4){
+		btn1.innerHTML = "A: " + b1;
 		btn2.style.display = "inline";
+		btn2.innerHTML = "B: " + b2;
 		btn3.style.display = "inline";
+		btn3.innerHTML = "C: " + b3;
 		btn4.style.display = "inline";
+		btn4.innerHTML = "D: " + b4;
 		btn5.style.display = "none";
 	}
-	if(buttons = 5){
+	if(buttonsCount == 5){
+		btn1.innerHTML = "A: " + b1;
 		btn2.style.display = "inline";
+		btn2.innerHTML = "B: " + b2;
 		btn3.style.display = "inline";
+		btn3.innerHTML = "C: " + b3;
 		btn4.style.display = "inline";
+		btn4.innerHTML = "D: " + b4;
 		btn5.style.display = "inline";
+		btn5.innerHTML = "E: " + b5;
 	}
+	
+	//console.log("buttons hidden/shown!");
 }
 
 //Replace that with button functions to get user input.
@@ -120,28 +131,28 @@ var buttons = function(){
 //Add variable for each button to place that variable into input.
 
 btn1.addEventListener("click", function(){
-  //input = b1;
-  //score();
+  input = b1;
+  score();
 });
 
 btn2.addEventListener("click", function(){
-  //input = b2;
-  //score();
+  input = b2;
+  score();
 });
 
 btn3.addEventListener("click", function(){
-  //input = b3;
-  //score();
+  input = b3;
+  score();
 });
 
 btn4.addEventListener("click", function(){
-  //input = b4;
-  //score();
+  input = b4;
+  score();
 });
 
 btn5.addEventListener("click", function(){
-  //input = b5;
-  //score();
+  input = b5;
+  score();
 });
 
 var score = function(){ 
@@ -160,28 +171,48 @@ var score = function(){
 var next = function(){
 	answered++;
 	
-	if(answered = 1){
+	console.log(answered);
+	
+	if(answered == 1){
 		question = "Image goes here!";
 		answer = "Answer goes here!";
 		b1 = "Answer goes here!";
 		b2 = "answer goes here!";
 		b3 = "Answer goes here";
-		buttons = 3;
+		buttonsCount = 3;
 		buttons();
 	}
 	
-	if(answered = 2){
+	if(answered == 2){
 		question = "Image goes here!";
 		answer = "Answer goes here!";
+		b1 = "Answer goes here!";
+		b2 = "answer goes here!";
+		b3 = "Answer goes here";
+		b4 = "Cake is an lie!";
+		b5 = "Not true!";
+		buttonsCount = 5;
+		buttons();
 	}
 	
-	if(answered = 3){
+	if(answered == 3){
 		question = "Image goes here!";
 		answer = "Answer goes here!";
+		b1 = "Answer goes here!";
+		b2 = "answer goes here!";
+		b3 = "Answer goes here";
+		buttonsCount = 3;
+		buttons();
 	}
 	
-	if(answered = 4){
+	if(answered == 4){
 		alert("Well done, you got " + correct + " out of 4");
+		btn1.style.display = "none";
+		btn2.style.display = "none";
+		btn3.style.display = "none";
+		btn4.style.display = "none";
+		btn5.style.display = "none";
+		console.log("Game won!");
 	}
 }
 
