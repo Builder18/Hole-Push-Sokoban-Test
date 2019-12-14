@@ -8,7 +8,7 @@ var b2 = "none";
 var b3 = "none";
 var b4 = "none";
 var b5 = "none";
-var para;
+var img = document.createElement("IMG");
 var buttonsCount = 1; // How many buttons.
 var btn1 = document.createElement("BUTTON");   // Create a <button> element
 var btn2 = document.createElement("BUTTON");
@@ -20,9 +20,8 @@ var answer = "none";
 var start = function(){
 	document.getElementById("startButton").style.display = "none";
 	
-	para = document.createElement("P");               // Create a <p> element
-	para.innerText = "Image goes here";               // Insert text
-	document.body.appendChild(para);                      // Append <p> to <body>
+	img.src = "easyone.png";
+	document.body.appendChild(img);                      // Append IMG to <body>
 	
 	document.body.appendChild(document.createElement("br")); // Linebreaks
 	document.body.appendChild(document.createElement("br"));
@@ -63,7 +62,7 @@ var start = function(){
 		//score();
 	});
 	//hide start button and show other ones here
-	question = "Image goes here!";
+	//question = "Image goes here!";
 	answer = "Pacman";
 	b1 = "Pacman";
 	buttonsCount = 1;
@@ -174,7 +173,8 @@ var next = function(){
 	console.log(answered);
 	
 	if(answered == 1){
-		question = "Image goes here!";
+		//img.src = "easyone.png"; //change to another image with this function
+		//question = "Image goes here!";
 		answer = "Answer goes here!";
 		b1 = "Answer goes here!";
 		b2 = "answer goes here!";
@@ -184,7 +184,8 @@ var next = function(){
 	}
 	
 	if(answered == 2){
-		question = "Image goes here!";
+		//img.src = "easyone.png"; //change to another image with this function
+		//question = "Image goes here!";
 		answer = "Answer goes here!";
 		b1 = "Answer goes here!";
 		b2 = "answer goes here!";
@@ -196,7 +197,8 @@ var next = function(){
 	}
 	
 	if(answered == 3){
-		question = "Image goes here!";
+		//img.src = "easyone.png"; //change to another image with this function
+		//question = "Image goes here!";
 		answer = "Answer goes here!";
 		b1 = "Answer goes here!";
 		b2 = "answer goes here!";
