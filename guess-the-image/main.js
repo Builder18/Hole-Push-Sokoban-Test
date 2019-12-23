@@ -61,6 +61,8 @@ var start = function(){
 		//input = b5;
 		//score();
 	});
+	document.body.appendChild(document.createElement("br")); // Linebreaks
+	document.body.appendChild(document.createElement("br"));
 	//hide start button and show other ones here
 	//question = "Image goes here!";
 	answer = "Pacman";
@@ -123,6 +125,9 @@ var buttons = function(){
 	}
 	
 	//console.log("buttons hidden/shown!");
+	
+	//img.width = 500;
+	//img.height = 500;
 }
 
 //Replace that with button functions to get user input.
@@ -173,37 +178,33 @@ var next = function(){
 	console.log(answered);
 	
 	if(answered == 1){
-		//img.src = "easyone.png"; //change to another image with this function
-		//question = "Image goes here!";
-		answer = "Answer goes here!";
-		b1 = "Answer goes here!";
-		b2 = "answer goes here!";
-		b3 = "Answer goes here";
+		img.src = "Screenshot_7.png"; //change to another image with this function
+		answer = "Smurf";
+		b1 = "Something frozen";
+		b2 = "Blue alien";
+		b3 = "Smurf";
 		buttonsCount = 3;
 		buttons();
 	}
 	
 	if(answered == 2){
-		//img.src = "easyone.png"; //change to another image with this function
-		//question = "Image goes here!";
-		answer = "Answer goes here!";
-		b1 = "Answer goes here!";
-		b2 = "answer goes here!";
-		b3 = "Answer goes here";
-		b4 = "Cake is an lie!";
-		b5 = "Not true!";
+		img.src = "Screenshot_9.png"; //change to another image with this function
+		answer = "Spiderman";
+		b1 = "Spiderman";
+		b2 = "Spittermen";
+		b3 = "Speederman";
+		b4 = "Some kind of superhero?";
+		b5 = "Next question, please!";
 		buttonsCount = 5;
 		buttons();
 	}
 	
 	if(answered == 3){
-		//img.src = "easyone.png"; //change to another image with this function
-		//question = "Image goes here!";
-		answer = "Answer goes here!";
-		b1 = "Answer goes here!";
-		b2 = "answer goes here!";
-		b3 = "Answer goes here";
-		buttonsCount = 3;
+		img.src = "Screenshot_8.png"; //change to another image with this function
+		answer = "Donald Duck";
+		b1 = "Donald Trump";
+		b2 = "Donald Duck";
+		buttonsCount = 2;
 		buttons();
 	}
 	
