@@ -209,7 +209,28 @@ var next = function(){
 	}
 	
 	if(answered == 4){
-		alert("Well done, you got " + correct + " out of 4");
+		img.src = "Screenshot_10.png"; //change to another image with this function
+		answer = "Kermit the frog";
+		b1 = "Kermit the frog";
+		b2 = "One eyed monster from Monster high";
+		b3 = "Texture colored green and white";
+		buttonsCount = 3;
+		buttons();
+	}
+	
+	if(answered == 5){
+		img.src = "Screenshot_11.png"; //change to another image with this function
+		answer = "Troll face";
+		b1 = "Sans from Undertale";
+		b2 = "Bendy and the ink machine";
+		b3 = "Black-white character";
+		b4 = "Troll face";
+		buttonsCount = 4;
+		buttons();
+	}
+	
+	if(answered == 6){
+		alert("Well done, you got " + correct + " out of 6");
 		btn1.style.display = "none";
 		btn2.style.display = "none";
 		btn3.style.display = "none";
