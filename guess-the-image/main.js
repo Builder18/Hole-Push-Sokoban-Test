@@ -230,7 +230,43 @@ var next = function(){
 	}
 	
 	if(answered == 6){
-		alert("Well done, you got " + correct + " out of 6");
+		img.src = "Screenshot_12.png"; //change to another image with this function
+		answer = "Sanic";
+		b1 = "Sanic";
+		b2 = "Sonic";
+		buttonsCount = 2;
+		buttons();
+	}
+	
+	if(answered == 7){
+		img.src = "Screenshot_13.png"; //change to another image with this function
+		answer = "Dat boi";
+		b1 = "Dat boi";
+		b2 = "Green Dino";
+		buttonsCount = 2;
+		buttons();
+	}
+	
+	if(answered == 8){
+		img.src = "Screenshot_14.png"; //change to another image with this function
+		answer = "Hot dog from Snapchat";
+		b1 = "candy orange headphones person";
+		b2 = "Hot dog from Snapchat";
+		buttonsCount = 2;
+		buttons();
+	}
+	
+	if(answered == 9){
+		img.src = "Screenshot_15.png"; //change to another image with this function
+		answer = "Peppa pig";
+		b1 = "Gary";
+		b2 = "Peppa pig";
+		buttonsCount = 2;
+		buttons();
+	}
+	
+	if(answered == 10){
+		alert("Well done, you got " + correct + " out of 10");
 		btn1.style.display = "none";
 		btn2.style.display = "none";
 		btn3.style.display = "none";
