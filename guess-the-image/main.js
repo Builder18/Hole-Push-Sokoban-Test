@@ -16,12 +16,18 @@ var btn3 = document.createElement("BUTTON");
 var btn4 = document.createElement("BUTTON");
 var btn5 = document.createElement("BUTTON");
 var answer = "none";
+var timeout;
+var showButton = document.createElement("BUTTON");
 
 var start = function(){
 	document.getElementById("startButton").style.display = "none";
 	
 	img.src = "easyone.png";
 	document.body.appendChild(img);                      // Append IMG to <body>
+	
+	showButton.innerHTML = "Show next image";                   // Insert text
+	document.body.appendChild(showButton);
+	showButton.style.display = "none";
 	
 	document.body.appendChild(document.createElement("br")); // Linebreaks
 	document.body.appendChild(document.createElement("br"));
@@ -69,6 +75,7 @@ var start = function(){
 	b1 = "Pacman";
 	buttonsCount = 1;
 	buttons();
+	timeout = setTimeout(alertFunc, 3000);
 	//ask();
 }
 
@@ -76,6 +83,10 @@ var start = function(){
 	input = prompt(question);
 	score();
 };*/
+
+function alertFunc() {
+  img.style.display = "none";
+}
 
 var buttons = function(){
 	if(buttonsCount == 1){
@@ -136,27 +147,43 @@ var buttons = function(){
 
 btn1.addEventListener("click", function(){
   input = b1;
+  img.style.display = "none";
+  clearTimeout(timeout);
   score();
 });
 
 btn2.addEventListener("click", function(){
   input = b2;
+  img.style.display = "none";
+  clearTimeout(timeout);
   score();
 });
 
 btn3.addEventListener("click", function(){
   input = b3;
+  img.style.display = "none";
+  clearTimeout(timeout);
   score();
 });
 
 btn4.addEventListener("click", function(){
   input = b4;
+  img.style.display = "none";
+  clearTimeout(timeout);
   score();
 });
 
 btn5.addEventListener("click", function(){
   input = b5;
+  img.style.display = "none";
+  clearTimeout(timeout);
   score();
+});
+
+showButton.addEventListener("click", function(){
+	timeout = setTimeout(alertFunc, 3000);
+	img.style.display = "block";
+	showButton.style.display = "none";
 });
 
 var score = function(){ 
@@ -176,6 +203,8 @@ var next = function(){
 	answered++;
 	
 	console.log(answered);
+	
+	showButton.style.display = "block";
 	
 	if(answered == 1){
 		img.src = "Screenshot_7.png"; //change to another image with this function
