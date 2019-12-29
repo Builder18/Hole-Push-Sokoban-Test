@@ -212,6 +212,9 @@ var next = function(){
 		b1 = "Something frozen";
 		b2 = "Blue alien";
 		b3 = "Smurf";
+		b4 = "Blue M&M";
+        	b5 = "Squidward";
+        	buttonsCount = 5;
 		buttonsCount = 3;
 		buttons();
 	}
@@ -222,8 +225,8 @@ var next = function(){
 		b1 = "Spiderman";
 		b2 = "Spittermen";
 		b3 = "Speederman";
-		b4 = "Some kind of superhero?";
-		b5 = "Next question, please!";
+		b4 = "Deadpool";
+        	b5 = "Ant-man";
 		buttonsCount = 5;
 		buttons();
 	}
@@ -233,7 +236,10 @@ var next = function(){
 		answer = "Donald Duck";
 		b1 = "Donald Trump";
 		b2 = "Donald Duck";
-		buttonsCount = 2;
+		b3 = "Mr.Quack";
+        	b4 = "Ducky Mcduck";
+        	b5 = "Daffy Duck";
+        	buttonsCount = 5;
 		buttons();
 	}
 	
@@ -243,7 +249,9 @@ var next = function(){
 		b1 = "Kermit the frog";
 		b2 = "One eyed monster from Monster high";
 		b3 = "Texture colored green and white";
-		buttonsCount = 3;
+		b4 = "Plant monster";
+        	b5 = "Pickle Rick";
+        	buttonsCount = 5;
 		buttons();
 	}
 	
@@ -254,7 +262,8 @@ var next = function(){
 		b2 = "Bendy and the ink machine";
 		b3 = "Black-white character";
 		b4 = "Troll face";
-		buttonsCount = 4;
+		b5 = "Snoopy";
+        	buttonsCount = 5;
 		buttons();
 	}
 	
@@ -263,7 +272,10 @@ var next = function(){
 		answer = "Sanic";
 		b1 = "Sanic";
 		b2 = "Sonic";
-		buttonsCount = 2;
+		b3 = "Baby Shark";
+        	b4 = "Bruce (The shark from Finding Nemo)";
+        	b5 = "Dory";
+        	buttonsCount = 5;
 		buttons();
 	}
 	
@@ -272,7 +284,10 @@ var next = function(){
 		answer = "Dat boi";
 		b1 = "Dat boi";
 		b2 = "Green Dino";
-		buttonsCount = 2;
+		b3 = "A clown riding a Unicycle";
+        	b4 = "Rex (From Toy Story)";
+        	b5 = "The good dinosaur";
+        	buttonsCount = 5;
 		buttons();
 	}
 	
@@ -281,7 +296,10 @@ var next = function(){
 		answer = "Hot dog from Snapchat";
 		b1 = "candy orange headphones person";
 		b2 = "Hot dog from Snapchat";
-		buttonsCount = 2;
+		b3 = "Homer Simpson dressed as a hot dog";
+        	b4 = "Sausage man";
+        	b5 = "The lego hot dog man";
+        	buttonsCount = 5;
 		buttons();
 	}
 	
@@ -290,12 +308,27 @@ var next = function(){
 		answer = "Peppa pig";
 		b1 = "Gary";
 		b2 = "Peppa pig";
-		buttonsCount = 2;
+		b3 = "Pink Panther";
+        	b4 = "Kirby";
+        	b5 = "Piglet";
+        	buttonsCount = 5;
 		buttons();
 	}
 	
 	if(answered == 10){
-		alert("Well done, you got " + correct + " out of 10");
+        	img.src = "shrek.png"; //change to another image with this function
+        	answer = "Shrek";
+        	b1 = "Shrek";
+        	b2 = "Green stick";
+        	b3 = "The Grinch";
+        	b4 = "Oscar (The Dustbin Muppet)";
+        	b3 = "Dispy (The green teletubby)";
+        	buttonsCount = 5;
+        	buttons();
+    	}
+	
+	if(answered == 11){
+		alert("Well done, you got " + correct + " out of 11");
 		btn1.style.display = "none";
 		btn2.style.display = "none";
 		btn3.style.display = "none";
