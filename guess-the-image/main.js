@@ -215,7 +215,6 @@ var next = function(){
 		b4 = "Blue M&M";
         	b5 = "Squidward";
         	buttonsCount = 5;
-		buttonsCount = 3;
 		buttons();
 	}
 	
