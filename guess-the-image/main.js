@@ -321,7 +321,7 @@ var next = function(){
         	b2 = "Green stick";
         	b3 = "The Grinch";
         	b4 = "Oscar (The Dustbin Muppet)";
-        	b3 = "Dispy (The green teletubby)";
+        	b5 = "Dispy (The green teletubby)";
         	buttonsCount = 5;
         	buttons();
     	}
