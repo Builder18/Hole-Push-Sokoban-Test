@@ -18,9 +18,41 @@ var btn5 = document.createElement("BUTTON");
 var answer = "none";
 var timeout;
 var showButton = document.createElement("BUTTON");
+var loadButton = document.createElement("BUTTON");
+
+var save = function(){
+	if (typeof(Storage) !== "undefined") {
+		// Code for localStorage/sessionStorage.
+		localStorage.setItem("gti-correctanswers", JSON.stringify(correct));
+		localStorage.setItem("gti-incorrectanswers", JSON.stringify(incorrect));
+		localStorage.setItem("gti-answeredcount", JSON.stringify(answered));
+	} else {
+		// Sorry! No Web Storage support..
+		console.log("Your browser doesn't support Web Storage.");
+	};
+};
+
+var load = function(){
+	// Retrieve
+	console.log("loading...")
+      try {
+				correct = JSON.parse(localStorage.getItem("gti-correctanswers"));
+      } catch (ex) {
+      	console.log('Exception while loading game, please report this.', ex);
+      }
+		
+		incorrect = JSON.parse(localStorage.getItem("gti-incorrectanswers"));
+		answered = JSON.parse(localStorage.getItem("gti-answeredcount"));
+		
+		next();
+};
 
 var start = function(){
 	document.getElementById("startButton").style.display = "none";
+	
+	loadButton.innerHTML = "Load";
+	document.body.appendChild(loadButton);
+	
 	
 	img.src = "easyone.png";
 	document.body.appendChild(img);                      // Append IMG to <body>
@@ -77,7 +109,7 @@ var start = function(){
 	buttons();
 	timeout = setTimeout(alertFunc, 3000);
 	//ask();
-}
+};
 
 /*var ask = function(){ 
 	input = prompt(question);
@@ -86,7 +118,7 @@ var start = function(){
 
 function alertFunc() {
   img.style.display = "none";
-}
+};
 
 var buttons = function(){
 	if(buttonsCount == 1){
@@ -136,9 +168,6 @@ var buttons = function(){
 	}
 	
 	//console.log("buttons hidden/shown!");
-	
-	//img.width = 500;
-	//img.height = 500;
 }
 
 //Replace that with button functions to get user input.
@@ -186,6 +215,10 @@ showButton.addEventListener("click", function(){
 	showButton.style.display = "none";
 });
 
+loadButton.addEventListener("click", function(){
+	load();
+});
+
 var score = function(){ 
 	if(input == answer){ 
 		correct = correct+1;
@@ -194,14 +227,20 @@ var score = function(){
 		incorrect = incorrect+1;
 		alert("incorrect");
 	}
-	next();
+	loadfix();
 };
 
 //Use function to select next question.
 
-var next = function(){
+var loadfix = function(){
 	answered++;
 	
+	save();
+	
+	next();
+};
+
+var next = function(){
 	console.log(answered);
 	
 	showButton.style.display = "block";
@@ -308,23 +347,23 @@ var next = function(){
 		b1 = "Gary";
 		b2 = "Peppa pig";
 		b3 = "Pink Panther";
-        	b4 = "Kirby";
-        	b5 = "Piglet";
-        	buttonsCount = 5;
+      b4 = "Kirby";
+      b5 = "Piglet";
+      buttonsCount = 5;
 		buttons();
 	}
 	
 	if(answered == 10){
-        	img.src = "shrek.png"; //change to another image with this function
-        	answer = "Shrek";
-        	b1 = "Shrek";
-        	b2 = "Green stick";
-        	b3 = "The Grinch";
-        	b4 = "Oscar (The Dustbin Muppet)";
-        	b5 = "Dispy (The green teletubby)";
-        	buttonsCount = 5;
-        	buttons();
-    	}
+      img.src = "shrek.png"; //change to another image with this function
+      answer = "Shrek";
+      b1 = "Shrek";
+      b2 = "Green stick";
+      b3 = "The Grinch";
+      b4 = "Oscar (The Dustbin Muppet)";
+      b5 = "Dispy (The green teletubby)";
+      buttonsCount = 5;
+      buttons();
+    }
 	
 	if(answered == 11){
 		alert("Well done, you got " + correct + " out of 11");
@@ -336,4 +375,3 @@ var next = function(){
 		console.log("Game won!");
 	}
 }
-
