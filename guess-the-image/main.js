@@ -235,6 +235,8 @@ var score = function(){
 var loadfix = function(){
 	answered++;
 	
+	showButton.style.display = "block";
+	
 	save();
 	
 	next();
@@ -242,8 +244,6 @@ var loadfix = function(){
 
 var next = function(){
 	console.log(answered);
-	
-	showButton.style.display = "block";
 	
 	if(answered == 1){
 		img.src = "Screenshot_7.png"; //change to another image with this function
