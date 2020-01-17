@@ -19,6 +19,7 @@ var answer = "none";
 var timeout;
 var showButton = document.createElement("BUTTON");
 var loadButton = document.createElement("BUTTON");
+var centerDiv;
 
 var save = function(){
 	if (typeof(Storage) !== "undefined") {
@@ -50,57 +51,59 @@ var load = function(){
 var start = function(){
 	document.getElementById("startButton").style.display = "none";
 	
+	centerDiv = document.getElementById("centerMe");
+	
 	loadButton.innerHTML = "Load";
-	document.body.appendChild(loadButton);
+	centerDiv.appendChild(loadButton);
 	
 	
 	img.src = "easyone.png";
-	document.body.appendChild(img);                      // Append IMG to <body>
+	centerDiv.appendChild(img);                      // Append IMG to <body>
 	
 	showButton.innerHTML = "Show next image";                   // Insert text
-	document.body.appendChild(showButton);
+	centerDiv.appendChild(showButton);
 	showButton.style.display = "none";
 	
-	document.body.appendChild(document.createElement("br")); // Linebreaks
-	document.body.appendChild(document.createElement("br"));
+	centerDiv.appendChild(document.createElement("br")); // Linebreaks
+	centerDiv.appendChild(document.createElement("br"));
 	
 	btn1.innerHTML = "A";                   // Insert text
 	btn1.id ='btn1';
-	document.body.appendChild(btn1);               // Append <button> to <body>
+	centerDiv.appendChild(btn1);               // Append <button> to <body>
 	btn1.addEventListener("click", function(){
 		//input = b1;
 		//score();
 	});
 	btn2.innerHTML = "B";                   // Insert text
 	btn2.id ='btn2';
-	document.body.appendChild(btn2);               // Append <button> to <body>
+	centerDiv.appendChild(btn2);               // Append <button> to <body>
 	btn2.addEventListener("click", function(){
 		//input = b2;
 		//score();
 	});
 	btn3.innerHTML = "C";                   // Insert text
 	btn3.id ='btn3';
-	document.body.appendChild(btn3);               // Append <button> to <body>
+	centerDiv.appendChild(btn3);               // Append <button> to <body>
 	btn3.addEventListener("click", function(){
 		//input = b3;
 		//score();
 	});
 	btn4.innerHTML = "D";                   // Insert text
 	btn4.id ='btn4';
-	document.body.appendChild(btn4);               // Append <button> to <body>
+	centerDiv.appendChild(btn4);               // Append <button> to <body>
 	btn4.addEventListener("click", function(){
 		//input = b4;
 		//score();
 	});
 	btn5.innerHTML = "E";                   // Insert text
 	btn5.id ='btn5';
-	document.body.appendChild(btn5);               // Append <button> to <body>
+	centerDiv.appendChild(btn5);               // Append <button> to <body>
 	btn5.addEventListener("click", function(){
 		//input = b5;
 		//score();
 	});
-	document.body.appendChild(document.createElement("br")); // Linebreaks
-	document.body.appendChild(document.createElement("br"));
+	centerDiv.appendChild(document.createElement("br")); // Linebreaks
+	centerDiv.appendChild(document.createElement("br"));
 	//hide start button and show other ones here
 	//question = "Image goes here!";
 	answer = "Pacman";
@@ -211,7 +214,7 @@ btn5.addEventListener("click", function(){
 
 showButton.addEventListener("click", function(){
 	timeout = setTimeout(alertFunc, 3000);
-	img.style.display = "block";
+	img.style.display = "inline";
 	showButton.style.display = "none";
 });
 
@@ -235,8 +238,6 @@ var score = function(){
 var loadfix = function(){
 	answered++;
 	
-	showButton.style.display = "block";
-	
 	save();
 	
 	next();
@@ -244,6 +245,8 @@ var loadfix = function(){
 
 var next = function(){
 	console.log(answered);
+	
+	showButton.style.display = "inline";
 	
 	if(answered == 1){
 		img.src = "Screenshot_7.png"; //change to another image with this function
