@@ -369,7 +369,7 @@ var next = function(){
     }
 	
 	if(answered == 11){
-		alert("Well done, you got " + correct + " out of 11");
+		alert("Well done, you got " + correct + " out of 10");
 		btn1.style.display = "none";
 		btn2.style.display = "none";
 		btn3.style.display = "none";
