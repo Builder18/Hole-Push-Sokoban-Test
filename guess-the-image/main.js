@@ -402,6 +402,7 @@ var next = function(){
         b5 = "Donald Trump";
         buttonsCount = 5;
         buttons();
+     }
 	
 	if(answered == 14){
 		alert("Well done, you got " + correct + " out of 12");
