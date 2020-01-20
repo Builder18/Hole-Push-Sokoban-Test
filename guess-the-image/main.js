@@ -367,9 +367,44 @@ var next = function(){
       buttonsCount = 5;
       buttons();
     }
+	 
+	 if(answered == 11){
+        img.src = "pikachu.png"; //change to another image with this function
+        answer = "Pikachu";
+        b1 = "Iron man";
+        b2 = "Bart Simpson";
+        b3 = "Pikachu";
+        b4 = "Giant chicken from Family guy";
+        b5 = "Charmander";
+        buttonsCount = 5;
+        buttons();
+    }
+ 
+     if(answered == 12){
+        img.src = "pepe-the-frog.png"; //change to another image with this function
+        answer = "Pepe the frog";
+        b1 = "Illuminati";
+        b2 = "Pepe the frog";
+        b3 = "Hulk";
+        b4 = "Super Saiyan green";
+        b5 = "Shrek";
+        buttonsCount = 5;
+        buttons();
+    }
+ 
+     if(answered == 13){
+        img.src = "donald-trump.png"; //change to another image with this function
+        answer = "Donald Trump";
+        b1 = "Bill Clinton";
+        b2 = "Theresa May";
+        b3 = "Boris Johnson";
+        b4 = "Hillary Clinton";
+        b5 = "Donald Trump";
+        buttonsCount = 5;
+        buttons();
 	
-	if(answered == 11){
-		alert("Well done, you got " + correct + " out of 10");
+	if(answered == 14){
+		alert("Well done, you got " + correct + " out of 12");
 		btn1.style.display = "none";
 		btn2.style.display = "none";
 		btn3.style.display = "none";
