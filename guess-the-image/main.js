@@ -402,10 +402,22 @@ var next = function(){
         b5 = "Donald Trump";
         buttonsCount = 5;
         buttons();
-     }
+	  }
+	  
+	  if(answered == 14){
+		  img.src = "Mr.Burns.png"; //change to another image with this function
+        answer = "Mr.Burns";
+        b1 = "Cheese boi";
+        b2 = "Cheese man";
+        b3 = "Spongebob's dad";
+        b4 = "Mr.Burns";
+        b5 = "Yellow planet";
+        buttonsCount = 5;
+        buttons();
+	  }
 	
-	if(answered == 14){
-		alert("Well done, you got " + correct + " out of 12");
+	if(answered == 15){
+		alert("Well done, you got " + correct + " out of 14");
 		btn1.style.display = "none";
 		btn2.style.display = "none";
 		btn3.style.display = "none";
