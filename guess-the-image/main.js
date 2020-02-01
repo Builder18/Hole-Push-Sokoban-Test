@@ -350,9 +350,9 @@ var next = function(){
 		b1 = "Gary";
 		b2 = "Peppa pig";
 		b3 = "Pink Panther";
-      b4 = "Kirby";
-      b5 = "Piglet";
-      buttonsCount = 5;
+      		b4 = "Kirby";
+      		b5 = "Piglet";
+      		buttonsCount = 5;
 		buttons();
 	}
 	
@@ -406,18 +406,30 @@ var next = function(){
 	  
 	  if(answered == 14){
 		  img.src = "Mr.Burns.png"; //change to another image with this function
-        answer = "Mr.Burns";
-        b1 = "Cheese boi";
-        b2 = "Cheese man";
-        b3 = "Spongebob's dad";
-        b4 = "Mr.Burns";
-        b5 = "Yellow planet";
-        buttonsCount = 5;
-        buttons();
+        	answer = "Mr.Burns";
+        	b1 = "Cheese boi";
+        	b2 = "Cheese man";
+        	b3 = "Spongebob's dad";
+        	b4 = "Mr.Burns";
+        	b5 = "Yellow planet";
+        	buttonsCount = 5;
+        	buttons();
+	  }
+	  
+	  if(answered == 15){
+		  img.src = "Mrs Potato head.png"; //change to another image with this function
+        	answer = "Mrs. Potato head";
+        	b1 = "Flower boi";
+        	b2 = "Mrs. Potato head";
+        	b3 = "Field of flowers";
+        	b4 = "Toy flower";
+        	b5 = "Flower hat";
+        	buttonsCount = 5;
+        	buttons();
 	  }
 	
-	if(answered == 15){
-		alert("Well done, you got " + correct + " out of 14");
+	if(answered == 16){
+		alert("Well done, you got " + correct + " out of 15");
 		btn1.style.display = "none";
 		btn2.style.display = "none";
 		btn3.style.display = "none";
