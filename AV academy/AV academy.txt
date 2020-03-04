@@ -1,0 +1,29 @@
+
+
+Dialogue: Level 1
+
+Hello and welcome to anti-virus academy, where you learn basics of being anti-virus program.
+
+Your first lesson is to find your installation folder and open configuration file in there.
+
+Level started:
+
+You see folders called Program Files, Windows and Users.
+
+Double-click folder to go into it.
+
+Your target folder in in Program Files.
+
+Level completed: 
+
+Definitions have been upgraded successfully!
+
+
+
+Dialogue: Level 2
+
+With upgraded definitions, you detected PUA aka Potentially Unwanted Application in computer.
+
+Your task is to find and right-click it.
+
+Then user gets to decide what to do with it.
