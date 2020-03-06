@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
 	<title>AV academy</title>
-	<script src="main.js"></script>
 	<style>
 		.container {
 			position: relative;
@@ -24,16 +23,18 @@
 </style>
 </head>
 <body>
-	<!--Version:0.2-->
+	<!--Version:0.3-->
 <div class="container">
-	<img id="sb-image" src="Speech-bubble.png" alt="Speech bubble" style="display: block;margin-left: auto;margin-right: auto;width: 50%;"> <!--onclick="next()"-->
-	<div class="center">Hello and welcome to anti-virus academy, where you learn basics of being anti-virus program.</div>
+	<img id="sb-image" src="Speech-bubble.png" alt="Speech bubble" style="display: block;margin-left: auto;margin-right: auto;width: 50%;">
+	<div class="center" id="sb-text">Hello and welcome to anti-virus academy, where<br> you learn basics of being anti-virus program.</div>
 </div>
-	<img src="Defender.png" style="display: block;margin-left: auto;margin-right: auto;width: 50%;"><br> <!--onclick="tickle()"--> <!--maybe with tickle counter-->
+	<img src="Defender.png" onclick="tickle()" style="display: block;margin-left: auto;margin-right: auto;width: 50%;"><br> <!--maybe with tickle counter-->
 	Test images<br><br>
 	<img id="programFilesImage" src="transparent.png" style="width: 120px;height: 150px;background: url(spritesheet.png) 0 0;">
 	<img src="transparent.png" style="width: 120px;height: 150px;background: url(spritesheet.png) -120px 0;">
 	<img src="transparent.png" style="width: 120px;height: 150px;background: url(spritesheet.png) 0 -150px;"><br>
 	<img src="small-folder.png"><br> <img src="small-folder.png"><br> <img src="small-folder.png">
+	<!--Keep script on here-->
+	<script src="main.js"></script>
 </body>
 </html>
