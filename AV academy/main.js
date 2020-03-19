@@ -11,6 +11,7 @@ var configLogo = document.getElementById('configLogo');
 var programFilesImage = document.getElementById('programFilesImage');
 var windowsImage = document.getElementById('windowsImage');
 var usersImage = document.getElementById('usersImage');
+var insideProgramFiles = document.getElementById('insideProgramFiles');
 
 //Hiding elements that aren't needed in beginning
 defenderLogo.style.display = "none";
@@ -18,9 +19,14 @@ configLogo.style.display = "none";
 programFilesImage.style.display = "none";
 windowsImage.style.display = "none";
 usersImage.style.display = "none";
+insideProgramFiles.style.display = "none";
 
 programFilesImage.addEventListener('click', function(){
-	alert('Place for installed programs.');
+	//alert('Place for installed programs.');
+	programFilesImage.style.display = "none";
+	windowsImage.style.display = "none";
+	usersImage.style.display = "none";
+	insideProgramFiles.style.display = "block";
 });
 
 windowsImage.addEventListener('click', function(){
