@@ -2,6 +2,7 @@ var HPTimeout;
 var AtkTimeout;
 var DefTimeout;
 var rememberedElement = null;
+var nextElement = null;
 
 //Variables that can change go here
 var currentHP = 3;
@@ -59,7 +60,7 @@ function DefOut() {
 //After timeout handlers, main functionality of buttons goes here
 
 function HPIncrease() {
-	//if (statPoints < 1) return;
+	if (statPoints < 1) return;
 	currentHP++;
 	HP.innerHTML = currentHP;
 	statPoints--;
@@ -67,7 +68,7 @@ function HPIncrease() {
 }
 
 function AtkIncrease() {
-	//if (statPoints < 2) return;
+	if (statPoints < 2) return;
 	currentAtk++;
 	Atk.innerHTML = currentAtk;
 	statPoints -= 2;
@@ -75,7 +76,7 @@ function AtkIncrease() {
 }
 
 function DefIncrease() {
-	//if (statPoints < 3) return;
+	if (statPoints < 3) return;
 	currentDef++;
 	Def.innerHTML = currentDef;
 	statPoints -= 3;
@@ -84,9 +85,18 @@ function DefIncrease() {
 
 //Untested, may not work correctly
 function addEventListeners(){
-     var images = document.getElementsByClassName("images");
-     for (var i = 0; i < images.length; i++){
+	 setTimeout(addEventListeners, 5000);
+	 //Finds all images and stores list of them.
+    var images = document.getElementsByClassName("images");
+	 //Changes rememberedElement to null
+	 rememberedElement = null;
+	 heroFound = 0;
+	 //Loops through images, you could use break to get out of loop
+    for (var i = 0; i < images.length; i++){
+		//Loop causing problem with swapImages, move things out of loop
+		//Takes one of images from list.
 		var image = images[i];
+		
 		/*image.addEventListener('click',function(event){
          if (rememberedElement === null){
             rememberedElement = event.target;
@@ -96,27 +106,87 @@ function addEventListeners(){
          }
 		},false); */
 		
+		//Check if we already have something in rememberedElement.
 		if (rememberedElement === null){
+			//If not, try to find hero.png
 			if (image.getAttribute('src') === 'hero.png') {
+				//hero.png was found!
 				rememberedElement = image;
 			
-				console.log(rememberedElement);
+				//console.log(rememberedElement);
 				} else {
-				console.log(image.getAttribute('src'));
+				//console.log(image.getAttribute('src'));
 			}
 		}
       else {
 			//console.log(image);
-			//swapImages(rememberedElement, image);
+			heroFound = 1;
+			break;
 		}
    } //for i
+	//if (heroFound) console.log("Hero found!");
+	if (heroFound) swapImages(rememberedElement, image);
  }
  
+ /*function prepareSwap {
+	 for (i = 0; i < images.length; i++){
+		 image = images[i];
+		 if ()
+	 }
+	 
+	 swapImages(rememberedElement, nextElement);
+ }*/
+ 
  function swapImages(image1, image2){
-    var tmpSrc = image1.getAttribute('src');
-
-    image1.setAttribute('src', image2.getAttribute('src'));
-    image2.setAttribute('src', tmpSrc);
+    var tmpSrc = image2.getAttribute('src');
+	 
+	 console.log(tmpSrc);
+	 
+	 if (tmpSrc === 'baddie1.png') {
+		if (currentDef < 1) {
+			currentHP--;
+			HP.innerHTML = currentHP;
+		}
+		//For stronger baddies, check currentAtk as well
+		statPoints += 2;
+		stats.innerHTML = statPoints;
+		 
+		tmpSrc = 'empty.png';
+	 }
+	 
+	 if (tmpSrc === 'baddie2.png') {
+		if (currentDef < 5) {
+			currentHP -= (5 - currentDef);
+			HP.innerHTML = currentHP;
+			//If HP reaches 0, do something here
+		}
+		//For stronger baddies, check currentAtk as well
+		if (currentAtk > 2) {
+			statPoints += 8;
+			stats.innerHTML = statPoints;
+		 
+			tmpSrc = 'empty.png';
+		} else {
+				if (currentDef < 5) {
+					currentHP -= (5 - currentDef);
+					HP.innerHTML = currentHP;
+				}
+				if (currentAtk > 1) {
+					statPoints += 8;
+					stats.innerHTML = statPoints;
+		 
+					tmpSrc = 'empty.png';
+				}
+			
+		}
+	 }
+	 
+    if (currentHP > 0) {
+		image2.setAttribute('src', image1.getAttribute('src'));
+		image1.setAttribute('src', tmpSrc);
+	 } else {
+		 console.log("RIP");
+	 }
 
     //rememberedElement = null;
  }
