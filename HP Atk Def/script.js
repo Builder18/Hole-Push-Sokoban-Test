@@ -1,6 +1,7 @@
 var HPTimeout;
 var AtkTimeout;
 var DefTimeout;
+var rememberedElement = null;
 
 //Variables that can change go here
 var currentHP = 3;
@@ -81,4 +82,43 @@ function DefIncrease() {
 	stats.innerHTML = statPoints;
 }
 
+//Untested, may not work correctly
+function addEventListeners(){
+     var images = document.getElementsByClassName("images");
+     for (var i = 0; i < images.length; i++){
+		var image = images[i];
+		/*image.addEventListener('click',function(event){
+         if (rememberedElement === null){
+            rememberedElement = event.target;
+         }
+         else {
+            swapImages(rememberedElement, event.target);
+         }
+		},false); */
+		
+		if (rememberedElement === null){
+			if (image.getAttribute('src') === 'hero.png') {
+				rememberedElement = image;
+			
+				console.log(rememberedElement);
+				} else {
+				console.log(image.getAttribute('src'));
+			}
+		}
+      else {
+			//console.log(image);
+			//swapImages(rememberedElement, image);
+		}
+   } //for i
+ }
+ 
+ function swapImages(image1, image2){
+    var tmpSrc = image1.getAttribute('src');
 
+    image1.setAttribute('src', image2.getAttribute('src'));
+    image2.setAttribute('src', tmpSrc);
+
+    //rememberedElement = null;
+ }
+ 
+ 

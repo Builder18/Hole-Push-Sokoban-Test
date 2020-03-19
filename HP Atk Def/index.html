@@ -3,8 +3,8 @@
 <head>
 	<title>HP Atk Def incremental</title>
 </head>
-<body>
-	<!--Version:0.1-->
+<body onload="addEventListeners()">
+	<!--Version:0.2-->
 	
 	HP: <span id="HP">3</span><button id="give-HP">Give HP</button> Atk: <span id="Atk">1</span><button id="give-Atk">Give Atk</button> 
 	Def: <span id="Def">0</span><button id="give-Def">Give Def</button><br>
@@ -13,7 +13,8 @@
 	
 	<br><br>
 	
-	<image src="hero.png"></image><image src="empty.png"></image>
+	<image src="hero.png" class="images"></image><image src="empty.png" class="images"></image>
+	<image src="baddie1.png" class="images"></image>
 
 	Player has three buttons: HP, Atk and Def. (Health, Attack and Defence)<br>
 
