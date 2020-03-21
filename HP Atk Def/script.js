@@ -2,28 +2,32 @@ var HPTimeout;
 var AtkTimeout;
 var DefTimeout;
 var rememberedElement = null;
-var nextElement = null;
+var startImages = document.getElementsByClassName("images");
 
 //Variables that can change go here
 var currentHP = 3;
 var currentAtk = 1;
 var currentDef = 0;
 var statPoints = 0;
+var dead = 0;
+var swapsDone = 0;
 
 //Elements go here
 var HP = document.getElementById('HP');
 var Atk = document.getElementById('Atk');
 var Def = document.getElementById('Def');
 var stats = document.getElementById('stats');
+var restartButton = document.getElementById('restart');
+var HPButton = document.getElementById('give-HP');
 
 //Hiding elements that aren't needed in beginning
-
+restartButton.style.display = 'none';
 
 //Listeners and other code go here
 
-document.getElementById("give-HP").addEventListener("mouseover", HPOver);
-document.getElementById("give-HP").addEventListener("mouseout", HPOut);
-document.getElementById("give-HP").addEventListener("click", HPIncrease);
+HPButton.addEventListener("mouseover", HPOver);
+HPButton.addEventListener("mouseout", HPOut);
+HPButton.addEventListener("click", HPIncrease);
 //For Atk
 document.getElementById("give-Atk").addEventListener("mouseover", AtkOver);
 document.getElementById("give-Atk").addEventListener("mouseout", AtkOut);
@@ -32,9 +36,11 @@ document.getElementById("give-Atk").addEventListener("click", AtkIncrease);
 document.getElementById("give-Def").addEventListener("mouseover", DefOver);
 document.getElementById("give-Def").addEventListener("mouseout", DefOut);
 document.getElementById("give-Def").addEventListener("click", DefIncrease);
+//Restart button
+restartButton.addEventListener("click", restart);
 
 function HPOver() {
-  HPTimeout = setInterval(HPIncrease, 2000);
+  HPTimeout = setInterval(HPIncrease, 1000);
 }
 
 function HPOut() {
@@ -42,7 +48,7 @@ function HPOut() {
 }
 
 function AtkOver() {
-  AtkTimeout = setInterval(AtkIncrease, 2000);
+  AtkTimeout = setInterval(AtkIncrease, 1000);
 }
 
 function AtkOut() {
@@ -50,7 +56,7 @@ function AtkOut() {
 }
 
 function DefOver() {
-  DefTimeout = setInterval(DefIncrease, 2000);
+  DefTimeout = setInterval(DefIncrease, 1000);
 }
 
 function DefOut() {
@@ -83,9 +89,24 @@ function DefIncrease() {
 	stats.innerHTML = statPoints;
 }
 
-//Untested, may not work correctly
+//Main function and game loop
 function addEventListeners(){
-	 setTimeout(addEventListeners, 5000);
+	 setTimeout(addEventListeners, 3000);
+	 if (currentHP < 1) {
+		 if (dead) {
+				return;
+		 } else {
+					statPoints += 3;
+					stats.innerHTML = statPoints;
+					console.log("RIP");
+					restartButton.style.display = 'inline';
+					HPButton.style.display = 'none';
+					dead = 1;
+					return;
+				}
+	 } else {
+		 dead = 0;
+	 }
 	 //Finds all images and stores list of them.
     var images = document.getElementsByClassName("images");
 	 //Changes rememberedElement to null
@@ -93,7 +114,6 @@ function addEventListeners(){
 	 heroFound = 0;
 	 //Loops through images, you could use break to get out of loop
     for (var i = 0; i < images.length; i++){
-		//Loop causing problem with swapImages, move things out of loop
 		//Takes one of images from list.
 		var image = images[i];
 		
@@ -128,19 +148,13 @@ function addEventListeners(){
 	if (heroFound) swapImages(rememberedElement, image);
  }
  
- /*function prepareSwap {
-	 for (i = 0; i < images.length; i++){
-		 image = images[i];
-		 if ()
-	 }
-	 
-	 swapImages(rememberedElement, nextElement);
- }*/
- 
  function swapImages(image1, image2){
     var tmpSrc = image2.getAttribute('src');
 	 
 	 console.log(tmpSrc);
+	 
+	 //Swaps done variable?
+	 //swapsDone++;
 	 
 	 if (tmpSrc === 'baddie1.png') {
 		if (currentDef < 1) {
@@ -148,47 +162,84 @@ function addEventListeners(){
 			HP.innerHTML = currentHP;
 		}
 		//For stronger baddies, check currentAtk as well
-		statPoints += 2;
+		if (currentHP > 0) statPoints += 2;
 		stats.innerHTML = statPoints;
 		 
 		tmpSrc = 'empty.png';
 	 }
 	 
 	 if (tmpSrc === 'baddie2.png') {
-		if (currentDef < 5) {
-			currentHP -= (5 - currentDef);
+		if (currentDef < 3) {
+			currentHP -= (3 - currentDef);
 			HP.innerHTML = currentHP;
-			//If HP reaches 0, do something here
 		}
 		//For stronger baddies, check currentAtk as well
 		if (currentAtk > 2) {
-			statPoints += 8;
+			if (currentHP > 0) statPoints += 8;
 			stats.innerHTML = statPoints;
 		 
 			tmpSrc = 'empty.png';
 		} else {
-				if (currentDef < 5) {
-					currentHP -= (5 - currentDef);
+				if (currentDef < 3) {
+					currentHP -= (3 - currentDef);
 					HP.innerHTML = currentHP;
 				}
-				if (currentAtk > 1) {
-					statPoints += 8;
-					stats.innerHTML = statPoints;
+				if (currentHP > 0) statPoints += 8;
+				stats.innerHTML = statPoints;
 		 
-					tmpSrc = 'empty.png';
-				}
-			
+				tmpSrc = 'empty.png';
 		}
 	 }
 	 
     if (currentHP > 0) {
 		image2.setAttribute('src', image1.getAttribute('src'));
 		image1.setAttribute('src', tmpSrc);
+		//image2.setAttribute('src', 'hero.png');
+		//image1.style.display = 'none';
 	 } else {
-		 console.log("RIP");
+		 //console.log("RIP");
 	 }
 
     //rememberedElement = null;
+	 //After reducing HP, check if HP is 0 or less
+	 if (currentHP < 1) {
+		 if (dead) {
+				return;
+		 } else {
+					statPoints += 3;
+					stats.innerHTML = statPoints;
+					console.log("RIP");
+					restartButton.style.display = 'inline';
+					HPButton.style.display = 'none';
+					dead = 1;
+					return;
+				}
+	 } else {
+		 dead = 0;
+	 }
+ }
+ 
+ function restart() {
+	 currentHP = 3;
+    /*currentAtk = 1;
+	 currentDef = 0;
+	 statPoints = 0;
+	 dead = 0;*/
+	 restartButton.style.display = 'none';
+	 HPButton.style.display = 'inline';
+	 //InnerHTML
+	 HP.innerHTML = currentHP;
+	 /*Atk.innerHTML = currentAtk;
+	 Def.innerHTML = currentDef;
+	 stats.innerHTML = statPoints;*/
+	 //Images
+	 //Loops through images, you could use break to get out of loop
+    /*for (var i = 0; i < startImages.length; i++){
+		//Takes one of images from list.
+		var image = startImages[i];
+		
+		console.log(image);
+	 }*/
  }
  
  
