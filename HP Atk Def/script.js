@@ -67,6 +67,7 @@ function DefOut() {
 
 function HPIncrease() {
 	if (statPoints < 1) return;
+	//If we have enough stat points, increase HP with 1, decrease stat points with 1 and upgrade html for both of them.
 	currentHP++;
 	HP.innerHTML = currentHP;
 	statPoints--;
@@ -91,20 +92,26 @@ function DefIncrease() {
 
 //Main function and game loop
 function addEventListeners(){
+	 //Call this function every 3000 milliseconds aka 3 seconds.
 	 setTimeout(addEventListeners, 3000);
+	 //Defeat handler, checks for current HP
 	 if (currentHP < 1) {
+		 //If HP is lower than 1, check if we are dead yet.
 		 if (dead) {
 				return;
 		 } else {
+					//Gain 3 stat points, show resurrect button and hide HP purchasing button.
 					statPoints += 3;
 					stats.innerHTML = statPoints;
 					console.log("RIP");
 					restartButton.style.display = 'inline';
 					HPButton.style.display = 'none';
+					//Mark as dead and return out of this function.
 					dead = 1;
 					return;
 				}
 	 } else {
+		 //If HP is 1 or more, mark as not dead.
 		 dead = 0;
 	 }
 	 //Finds all images and stores list of them.
@@ -156,18 +163,20 @@ function addEventListeners(){
 	 //Swaps done variable?
 	 //swapsDone++;
 	 
+	 //If image2 has baddie1 as it's source, run the battle.
 	 if (tmpSrc === 'baddie1.png') {
 		if (currentDef < 1) {
 			currentHP--;
 			HP.innerHTML = currentHP;
 		}
-		//For stronger baddies, check currentAtk as well
+		//Gain 2 stat points and upgrade html.
 		if (currentHP > 0) statPoints += 2;
 		stats.innerHTML = statPoints;
 		 
 		tmpSrc = 'empty.png';
 	 }
 	 
+	 //This one checks for baddie2 instead
 	 if (tmpSrc === 'baddie2.png') {
 		if (currentDef < 3) {
 			currentHP -= (3 - currentDef);
@@ -175,13 +184,39 @@ function addEventListeners(){
 		}
 		//For stronger baddies, check currentAtk as well
 		if (currentAtk > 2) {
+			if (currentHP > 0) statPoints += 5;
+			stats.innerHTML = statPoints;
+		 
+			tmpSrc = 'empty.png';
+		} else {
+				//Continue here if player's attack wasn't powerful enough.
+				if (currentDef < 3) {
+					currentHP -= (3 - currentDef);
+					HP.innerHTML = currentHP;
+				}
+				if (currentHP > 0) statPoints += 5;
+				stats.innerHTML = statPoints;
+		 
+				tmpSrc = 'empty.png';
+		}
+	 }
+	 
+	 if (tmpSrc === 'baddie3.png') {
+		 //Now we are starting to get serious. (Up to 11!)
+		 if (currentDef < 11) {
+			currentHP -= (11 - currentDef);
+			HP.innerHTML = currentHP;
+		}
+		//For stronger baddies, check currentAtk as well
+		if (currentAtk > 5) {
 			if (currentHP > 0) statPoints += 8;
 			stats.innerHTML = statPoints;
 		 
 			tmpSrc = 'empty.png';
 		} else {
-				if (currentDef < 3) {
-					currentHP -= (3 - currentDef);
+				//Continue here if player's attack wasn't powerful enough.
+				if (currentDef < 11) {
+					currentHP -= (11 - currentDef);
 					HP.innerHTML = currentHP;
 				}
 				if (currentHP > 0) statPoints += 8;
@@ -191,6 +226,7 @@ function addEventListeners(){
 		}
 	 }
 	 
+	 //Continue only if player isn't dead.
     if (currentHP > 0) {
 		image2.setAttribute('src', image1.getAttribute('src'));
 		image1.setAttribute('src', tmpSrc);
@@ -220,18 +256,21 @@ function addEventListeners(){
  }
  
  function restart() {
-	 currentHP = 3;
+	 //On resurrect, increase HP to 3, hide resurrect button, show HP purchasing button and upgrade html.
+	 
+	 //Instead increase HP to 3 + current stat points?
+	 currentHP = (3 + statPoints);
     /*currentAtk = 1;
-	 currentDef = 0;
+	 currentDef = 0;*/
 	 statPoints = 0;
-	 dead = 0;*/
+	 dead = 0;
 	 restartButton.style.display = 'none';
 	 HPButton.style.display = 'inline';
 	 //InnerHTML
 	 HP.innerHTML = currentHP;
 	 /*Atk.innerHTML = currentAtk;
-	 Def.innerHTML = currentDef;
-	 stats.innerHTML = statPoints;*/
+	 Def.innerHTML = currentDef;*/
+	 stats.innerHTML = statPoints;
 	 //Images
 	 //Loops through images, you could use break to get out of loop
     /*for (var i = 0; i < startImages.length; i++){
