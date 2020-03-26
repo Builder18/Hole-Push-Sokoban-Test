@@ -2,7 +2,7 @@ var HPTimeout;
 var AtkTimeout;
 var DefTimeout;
 var rememberedElement = null;
-var startImages = document.getElementsByClassName("images");
+var previousHP;
 
 //Variables that can change go here
 var currentHP = 3;
@@ -10,7 +10,7 @@ var currentAtk = 1;
 var currentDef = 0;
 var statPoints = 0;
 var dead = 0;
-var swapsDone = 0;
+var resurrectsCount = 0;
 
 //Elements go here
 var HP = document.getElementById('HP');
@@ -19,6 +19,8 @@ var Def = document.getElementById('Def');
 var stats = document.getElementById('stats');
 var restartButton = document.getElementById('restart');
 var HPButton = document.getElementById('give-HP');
+var HPLost = document.getElementById('HPLost');
+var statPointsGained = document.getElementById('statPointsGained');
 
 //Hiding elements that aren't needed in beginning
 restartButton.style.display = 'none';
@@ -155,13 +157,16 @@ function addEventListeners(){
 	if (heroFound) swapImages(rememberedElement, image);
  }
  
+ //After we know where to move, check for baddies and battle if one is found.
+ 
  function swapImages(image1, image2){
     var tmpSrc = image2.getAttribute('src');
 	 
 	 console.log(tmpSrc);
 	 
-	 //Swaps done variable?
-	 //swapsDone++;
+	 //Used to see how much HP you lost in battle.
+	 
+	 previousHP = currentHP;
 	 
 	 //If image2 has baddie1 as it's source, run the battle.
 	 if (tmpSrc === 'baddie1.png') {
@@ -170,10 +175,17 @@ function addEventListeners(){
 			HP.innerHTML = currentHP;
 		}
 		//Gain 2 stat points and upgrade html.
-		if (currentHP > 0) statPoints += 2;
+		if (currentHP > 0) { 
+			statPoints += 2;
+			statPointsGained.innerHTML = 2;
+		} else {
+			statPointsGained.innerHTML = 0;
+		}
+		
 		stats.innerHTML = statPoints;
 		 
 		tmpSrc = 'empty.png';
+		HPLost.innerHTML = (previousHP - currentHP);
 	 }
 	 
 	 //This one checks for baddie2 instead
@@ -184,7 +196,13 @@ function addEventListeners(){
 		}
 		//For stronger baddies, check currentAtk as well
 		if (currentAtk > 2) {
-			if (currentHP > 0) statPoints += 5;
+			if (currentHP > 0) { 
+				statPoints += 5;
+				statPointsGained.innerHTML = 5;
+			} else {
+				statPointsGained.innerHTML = 0;
+			}
+			
 			stats.innerHTML = statPoints;
 		 
 			tmpSrc = 'empty.png';
@@ -194,13 +212,21 @@ function addEventListeners(){
 					currentHP -= (3 - currentDef);
 					HP.innerHTML = currentHP;
 				}
-				if (currentHP > 0) statPoints += 5;
+				if (currentHP > 0) { 
+					statPoints += 5;
+					statPointsGained.innerHTML = 5;
+				} else {
+					statPointsGained.innerHTML = 0;
+				}
+				
 				stats.innerHTML = statPoints;
 		 
 				tmpSrc = 'empty.png';
 		}
+		HPLost.innerHTML = (previousHP - currentHP);
 	 }
 	 
+	 //This one is for baddie3
 	 if (tmpSrc === 'baddie3.png') {
 		 //Now we are starting to get serious. (Up to 11!)
 		 if (currentDef < 11) {
@@ -209,7 +235,13 @@ function addEventListeners(){
 		}
 		//For stronger baddies, check currentAtk as well
 		if (currentAtk > 5) {
-			if (currentHP > 0) statPoints += 8;
+			if (currentHP > 0) { 
+				statPoints += 8;
+				statPointsGained.innerHTML = 8;
+			} else {
+				statPointsGained.innerHTML = 0;
+			}
+			
 			stats.innerHTML = statPoints;
 		 
 			tmpSrc = 'empty.png';
@@ -219,11 +251,58 @@ function addEventListeners(){
 					currentHP -= (11 - currentDef);
 					HP.innerHTML = currentHP;
 				}
-				if (currentHP > 0) statPoints += 8;
+				if (currentHP > 0) { 
+					statPoints += 8;
+					statPointsGained.innerHTML = 8;
+				} else {
+					statPointsGained.innerHTML = 0;
+				}
+				
 				stats.innerHTML = statPoints;
 		 
 				tmpSrc = 'empty.png';
 		}
+		HPLost.innerHTML = (previousHP - currentHP);
+	 }
+	 
+	 //This one is for baddie4
+	 if (tmpSrc === 'baddie4.png') {
+		 if (currentDef < 20) {
+			currentHP -= (20 - currentDef);
+			HP.innerHTML = currentHP;
+		}
+		//For stronger baddies, check currentAtk as well
+		if (currentAtk > 8) {
+			if (currentHP > 0) { 
+				statPoints += 15;
+				statPointsGained.innerHTML = 15;
+				console.log(resurrectsCount + " resurrects");
+			} else {
+				statPointsGained.innerHTML = 0;
+			}
+			
+			stats.innerHTML = statPoints;
+		 
+			tmpSrc = 'empty.png';
+		} else {
+				//Continue here if player's attack wasn't powerful enough.
+				if (currentDef < 20) {
+					currentHP -= (20 - currentDef);
+					HP.innerHTML = currentHP;
+				}
+				if (currentHP > 0) { 
+					statPoints += 15;
+					statPointsGained.innerHTML = 15;
+					console.log(resurrectsCount + " resurrects");
+				} else {
+					statPointsGained.innerHTML = 0;
+				}
+				
+				stats.innerHTML = statPoints;
+		 
+				tmpSrc = 'empty.png';
+		}
+		HPLost.innerHTML = (previousHP - currentHP);
 	 }
 	 
 	 //Continue only if player isn't dead.
@@ -260,6 +339,7 @@ function addEventListeners(){
 	 
 	 //Instead increase HP to 3 + current stat points?
 	 currentHP = (3 + statPoints);
+	 resurrectsCount++;
     /*currentAtk = 1;
 	 currentDef = 0;*/
 	 statPoints = 0;
@@ -271,14 +351,6 @@ function addEventListeners(){
 	 /*Atk.innerHTML = currentAtk;
 	 Def.innerHTML = currentDef;*/
 	 stats.innerHTML = statPoints;
-	 //Images
-	 //Loops through images, you could use break to get out of loop
-    /*for (var i = 0; i < startImages.length; i++){
-		//Takes one of images from list.
-		var image = startImages[i];
-		
-		console.log(image);
-	 }*/
  }
  
  
