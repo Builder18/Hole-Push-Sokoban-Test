@@ -3,6 +3,7 @@ var AtkTimeout;
 var DefTimeout;
 var rememberedElement = null;
 var previousHP;
+var attackRequired;
 
 //Variables that can change go here
 var currentHP = 3;
@@ -195,6 +196,7 @@ function addEventListeners(){
 			HP.innerHTML = currentHP;
 		}
 		//For stronger baddies, check currentAtk as well
+			
 		if (currentAtk > 2) {
 			if (currentHP > 0) { 
 				statPoints += 5;
@@ -207,22 +209,43 @@ function addEventListeners(){
 		 
 			tmpSrc = 'empty.png';
 		} else {
-				//Continue here if player's attack wasn't powerful enough.
-				if (currentDef < 3) {
-					currentHP -= (3 - currentDef);
-					HP.innerHTML = currentHP;
+				do {
+					attackRequired = 3;
+					//Continue here if player's attack wasn't powerful enough.
+					if (currentDef < 3) {
+						currentHP -= (3 - currentDef);
+						HP.innerHTML = currentHP;
+					} else {
+						currentAtk++;
+						Atk.innerHTML = currentAtk;
+						statPoints -= 2;
+						stats.innerHTML = statPoints;
+					}
+					
+					
+					if (currentHP > 0) {
+						if (currentAtk < attackRequired) {
+							statPointsGained.innerHTML = 5;
+						}
+					} else {
+						statPointsGained.innerHTML = 0;
+						break;
+					}
 				}
-				if (currentHP > 0) { 
-					statPoints += 5;
-					statPointsGained.innerHTML = 5;
-				} else {
-					statPointsGained.innerHTML = 0;
-				}
+				//As long as currentHP is more than 0 or currentAtk is lower than attackRequired, don't exit while loop.
+				while (currentAtk < attackRequired);
 				
-				stats.innerHTML = statPoints;
+				//console.log(currentAtk);
+				
+				if (currentHP > 0) {
+					statPoints += 5;
+				
+					stats.innerHTML = statPoints;
 		 
-				tmpSrc = 'empty.png';
+					tmpSrc = 'empty.png';
+				}
 		}
+		//Keep this
 		HPLost.innerHTML = (previousHP - currentHP);
 	 }
 	 
@@ -235,7 +258,7 @@ function addEventListeners(){
 		}
 		//For stronger baddies, check currentAtk as well
 		if (currentAtk > 5) {
-			if (currentHP > 0) { 
+			if (currentHP > 0) {
 				statPoints += 8;
 				statPointsGained.innerHTML = 8;
 			} else {
@@ -246,21 +269,37 @@ function addEventListeners(){
 		 
 			tmpSrc = 'empty.png';
 		} else {
-				//Continue here if player's attack wasn't powerful enough.
-				if (currentDef < 11) {
-					currentHP -= (11 - currentDef);
-					HP.innerHTML = currentHP;
+				do {
+					attackRequired = 6;
+					//Continue here if player's attack wasn't powerful enough.
+					if (currentDef < 11) {
+						currentHP -= (11 - currentDef);
+						HP.innerHTML = currentHP;
+					} else {
+						currentAtk++;
+						Atk.innerHTML = currentAtk;
+						statPoints -= 2;
+						stats.innerHTML = statPoints;
+					}
+					
+					if (currentHP > 0) { 
+						if (currentAtk < attackRequired) {
+							statPointsGained.innerHTML = 8;
+						}
+					} else {
+						statPointsGained.innerHTML = 0;
+						break;
+					}
 				}
-				if (currentHP > 0) { 
-					statPoints += 8;
-					statPointsGained.innerHTML = 8;
-				} else {
-					statPointsGained.innerHTML = 0;
-				}
+				while (currentAtk < attackRequired);
 				
-				stats.innerHTML = statPoints;
+				if (currentHP > 0) {
+					statPoints += 8;
+				
+					stats.innerHTML = statPoints;
 		 
-				tmpSrc = 'empty.png';
+					tmpSrc = 'empty.png';
+				}
 		}
 		HPLost.innerHTML = (previousHP - currentHP);
 	 }
@@ -285,22 +324,39 @@ function addEventListeners(){
 		 
 			tmpSrc = 'empty.png';
 		} else {
-				//Continue here if player's attack wasn't powerful enough.
-				if (currentDef < 20) {
-					currentHP -= (20 - currentDef);
-					HP.innerHTML = currentHP;
+				do {
+					attackRequired = 9;
+					//Continue here if player's attack wasn't powerful enough.
+					if (currentDef < 20) {
+						currentHP -= (20 - currentDef);
+						HP.innerHTML = currentHP;
+					} else {
+						currentAtk++;
+						Atk.innerHTML = currentAtk;
+						statPoints -= 2;
+						stats.innerHTML = statPoints;
+					}
+					
+					if (currentHP > 0) { 
+						if (currentAtk < attackRequired) {
+							statPointsGained.innerHTML = 15;
+						}
+					} else {
+						statPointsGained.innerHTML = 0;
+						break;
+					}
 				}
-				if (currentHP > 0) { 
-					statPoints += 15;
-					statPointsGained.innerHTML = 15;
-					console.log(resurrectsCount + " resurrects");
-				} else {
-					statPointsGained.innerHTML = 0;
-				}
+				while (currentAtk < attackRequired);
 				
-				stats.innerHTML = statPoints;
+				if (currentHP > 0) {  
+					statPoints += 15;
+				
+					stats.innerHTML = statPoints;
+				
+					console.log(resurrectsCount + " resurrects");
 		 
-				tmpSrc = 'empty.png';
+					tmpSrc = 'empty.png';
+				}
 		}
 		HPLost.innerHTML = (previousHP - currentHP);
 	 }
