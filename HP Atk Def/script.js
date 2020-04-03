@@ -4,6 +4,12 @@ var DefTimeout;
 var rememberedElement = null;
 var previousHP;
 var attackRequired;
+var reduceStatPoints;
+var imageList = [];
+var images;
+var i;
+var image;
+
 
 //Variables that can change go here
 var currentHP = 3;
@@ -12,6 +18,7 @@ var currentDef = 0;
 var statPoints = 0;
 var dead = 0;
 var resurrectsCount = 0;
+var prestigesCount = 0;
 
 //Elements go here
 var HP = document.getElementById('HP');
@@ -22,6 +29,8 @@ var restartButton = document.getElementById('restart');
 var HPButton = document.getElementById('give-HP');
 var HPLost = document.getElementById('HPLost');
 var statPointsGained = document.getElementById('statPointsGained');
+var resurrects = document.getElementById('resurrects');
+var prestiges = document.getElementById('prestiges');
 
 //Hiding elements that aren't needed in beginning
 restartButton.style.display = 'none';
@@ -41,6 +50,20 @@ document.getElementById("give-Def").addEventListener("mouseout", DefOut);
 document.getElementById("give-Def").addEventListener("click", DefIncrease);
 //Restart button
 restartButton.addEventListener("click", restart);
+
+//Get list of all image src's and use it for prestige
+	//Finds all images and stores list of them.
+    images = document.getElementsByClassName("images");
+	 //Loops through images, you could use break to get out of loop
+    for (i = 0; i < images.length; i++){
+		//Takes one of images from list.
+		image = images[i];
+		//Take image src and append it to list
+		imageList.push(image.getAttribute('src'));
+   } //for i
+	
+console.log(imageList);
+//Finally put this variable into console log for analysis
 
 function HPOver() {
   HPTimeout = setInterval(HPIncrease, 1000);
@@ -118,14 +141,14 @@ function addEventListeners(){
 		 dead = 0;
 	 }
 	 //Finds all images and stores list of them.
-    var images = document.getElementsByClassName("images");
+    images = document.getElementsByClassName("images");
 	 //Changes rememberedElement to null
 	 rememberedElement = null;
 	 heroFound = 0;
 	 //Loops through images, you could use break to get out of loop
-    for (var i = 0; i < images.length; i++){
+    for (i = 0; i < images.length; i++){
 		//Takes one of images from list.
-		var image = images[i];
+		image = images[i];
 		
 		/*image.addEventListener('click',function(event){
          if (rememberedElement === null){
@@ -163,11 +186,12 @@ function addEventListeners(){
  function swapImages(image1, image2){
     var tmpSrc = image2.getAttribute('src');
 	 
-	 console.log(tmpSrc);
+	 //console.log(tmpSrc);
 	 
 	 //Used to see how much HP you lost in battle.
 	 
 	 previousHP = currentHP;
+	 reduceStatPoints = 0;
 	 
 	 //If image2 has baddie1 as it's source, run the battle.
 	 if (tmpSrc === 'baddie1.png') {
@@ -220,12 +244,13 @@ function addEventListeners(){
 						Atk.innerHTML = currentAtk;
 						statPoints -= 2;
 						stats.innerHTML = statPoints;
+						reduceStatPoints -= 2;
 					}
 					
 					
 					if (currentHP > 0) {
 						if (currentAtk < attackRequired) {
-							statPointsGained.innerHTML = 5;
+							statPointsGained.innerHTML = (5 + reduceStatPoints);
 						}
 					} else {
 						statPointsGained.innerHTML = 0;
@@ -280,11 +305,12 @@ function addEventListeners(){
 						Atk.innerHTML = currentAtk;
 						statPoints -= 2;
 						stats.innerHTML = statPoints;
+						reduceStatPoints -= 2;
 					}
 					
 					if (currentHP > 0) { 
 						if (currentAtk < attackRequired) {
-							statPointsGained.innerHTML = 8;
+							statPointsGained.innerHTML = (8 + reduceStatPoints);
 						}
 					} else {
 						statPointsGained.innerHTML = 0;
@@ -315,7 +341,8 @@ function addEventListeners(){
 			if (currentHP > 0) { 
 				statPoints += 15;
 				statPointsGained.innerHTML = 15;
-				console.log(resurrectsCount + " resurrects");
+				prestigeNow();
+				//console.log(resurrectsCount + " resurrects");
 			} else {
 				statPointsGained.innerHTML = 0;
 			}
@@ -335,11 +362,12 @@ function addEventListeners(){
 						Atk.innerHTML = currentAtk;
 						statPoints -= 2;
 						stats.innerHTML = statPoints;
+						reduceStatPoints -= 2;
 					}
 					
 					if (currentHP > 0) { 
 						if (currentAtk < attackRequired) {
-							statPointsGained.innerHTML = 15;
+							statPointsGained.innerHTML = (15 + reduceStatPoints);
 						}
 					} else {
 						statPointsGained.innerHTML = 0;
@@ -353,9 +381,11 @@ function addEventListeners(){
 				
 					stats.innerHTML = statPoints;
 				
-					console.log(resurrectsCount + " resurrects");
+					//console.log(resurrectsCount + " resurrects");
 		 
 					tmpSrc = 'empty.png';
+					
+					prestigeNow();
 				}
 		}
 		HPLost.innerHTML = (previousHP - currentHP);
@@ -391,9 +421,8 @@ function addEventListeners(){
  }
  
  function restart() {
-	 //On resurrect, increase HP to 3, hide resurrect button, show HP purchasing button and upgrade html.
-	 
-	 //Instead increase HP to 3 + current stat points?
+	 //On resurrect, increase HP to 3 + current stat points, hide resurrect button, show HP purchasing button and upgrade html.
+	
 	 currentHP = (3 + statPoints);
 	 resurrectsCount++;
     /*currentAtk = 1;
@@ -407,6 +436,30 @@ function addEventListeners(){
 	 /*Atk.innerHTML = currentAtk;
 	 Def.innerHTML = currentDef;*/
 	 stats.innerHTML = statPoints;
+	 resurrects.innerHTML = resurrectsCount;
+ }
+ 
+ function prestigeNow() {
+	 //Increases prestigesCount, resets HTML and player variables.
+	 prestigesCount++;
+	 //console.log(prestigesCount);
+	 prestiges.innerHTML = prestigesCount;
+	 currentHP = 3;
+	 currentAtk = 1;
+	 currentDef = 0;
+	 statPoints = 0;
+	 HP.innerHTML = currentHP;
+	 Atk.innerHTML = currentAtk;
+	 Def.innerHTML = currentDef;
+	 stats.innerHTML = statPoints;
+	 //Reset image src
+    for (i = 0; i < imageList.length; i++){
+		//Takes one of images from list.
+		image1 = imageList[i];
+		image2 = images[i];
+		//Change image
+		image2.setAttribute('src', image1);
+   } //for i
  }
  
  
