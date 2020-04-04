@@ -453,6 +453,9 @@ function addEventListeners(){
 	 Def.innerHTML = currentDef;
 	 stats.innerHTML = statPoints;
 	 //Reset image src
+	 images = document.getElementsByClassName("images");
+	 //console.log(images.length);console.log(imageList.length);
+	 console.log(images);
     for (i = 0; i < imageList.length; i++){
 		//Takes one of images from list.
 		image1 = imageList[i];
