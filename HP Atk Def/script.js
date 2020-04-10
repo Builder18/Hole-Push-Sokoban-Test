@@ -9,6 +9,7 @@ var imageList = [];
 var images;
 var i;
 var image;
+var previousBaddie;
 
 
 //Variables that can change go here
@@ -31,9 +32,11 @@ var HPLost = document.getElementById('HPLost');
 var statPointsGained = document.getElementById('statPointsGained');
 var resurrects = document.getElementById('resurrects');
 var prestiges = document.getElementById('prestiges');
+var betterHealing = document.getElementById('betterHealing');
 
 //Hiding elements that aren't needed in beginning
 restartButton.style.display = 'none';
+betterHealing.style.display = 'none';
 
 //Listeners and other code go here
 
@@ -94,7 +97,7 @@ function DefOut() {
 function HPIncrease() {
 	if (statPoints < 1) return;
 	//If we have enough stat points, increase HP with 1, decrease stat points with 1 and upgrade html for both of them.
-	currentHP++;
+	currentHP += (1 + prestigesCount);
 	HP.innerHTML = currentHP;
 	statPoints--;
 	stats.innerHTML = statPoints;
@@ -119,7 +122,7 @@ function DefIncrease() {
 //Main function and game loop
 function addEventListeners(){
 	 //Call this function every 3000 milliseconds aka 3 seconds.
-	 setTimeout(addEventListeners, 3000);
+	 setTimeout(addEventListeners, 2000);
 	 //Defeat handler, checks for current HP
 	 if (currentHP < 1) {
 		 //If HP is lower than 1, check if we are dead yet.
@@ -200,9 +203,11 @@ function addEventListeners(){
 			HP.innerHTML = currentHP;
 		}
 		//Gain 2 stat points and upgrade html.
-		if (currentHP > 0) { 
+		if (currentHP > 0) {
 			statPoints += 2;
 			statPointsGained.innerHTML = 2;
+			previousBaddie = image2;
+			//console.log(previousBaddie);
 		} else {
 			statPointsGained.innerHTML = 0;
 		}
@@ -222,9 +227,11 @@ function addEventListeners(){
 		//For stronger baddies, check currentAtk as well
 			
 		if (currentAtk > 2) {
-			if (currentHP > 0) { 
+			if (currentHP > 0) {
 				statPoints += 5;
 				statPointsGained.innerHTML = 5;
+				previousBaddie = image2;
+				//console.log(previousBaddie);
 			} else {
 				statPointsGained.innerHTML = 0;
 			}
@@ -268,6 +275,9 @@ function addEventListeners(){
 					stats.innerHTML = statPoints;
 		 
 					tmpSrc = 'empty.png';
+					
+					previousBaddie = image2;
+					//console.log(previousBaddie);
 				}
 		}
 		//Keep this
@@ -286,6 +296,8 @@ function addEventListeners(){
 			if (currentHP > 0) {
 				statPoints += 8;
 				statPointsGained.innerHTML = 8;
+				previousBaddie = image2;
+				//console.log(previousBaddie);
 			} else {
 				statPointsGained.innerHTML = 0;
 			}
@@ -325,6 +337,9 @@ function addEventListeners(){
 					stats.innerHTML = statPoints;
 		 
 					tmpSrc = 'empty.png';
+					
+					previousBaddie = image2;
+					//console.log(previousBaddie);
 				}
 		}
 		HPLost.innerHTML = (previousHP - currentHP);
@@ -341,6 +356,9 @@ function addEventListeners(){
 			if (currentHP > 0) { 
 				statPoints += 15;
 				statPointsGained.innerHTML = 15;
+				console.log(previousBaddie);
+				tmpSrc = 'baddie4.png';
+				image1 = previousBaddie;
 				prestigeNow();
 				//console.log(resurrectsCount + " resurrects");
 			} else {
@@ -348,8 +366,6 @@ function addEventListeners(){
 			}
 			
 			stats.innerHTML = statPoints;
-		 
-			tmpSrc = 'empty.png';
 		} else {
 				do {
 					attackRequired = 9;
@@ -382,8 +398,11 @@ function addEventListeners(){
 					stats.innerHTML = statPoints;
 				
 					//console.log(resurrectsCount + " resurrects");
-		 
-					tmpSrc = 'empty.png';
+					
+					console.log(previousBaddie);
+					
+					tmpSrc = 'baddie4.png';
+					image1 = previousBaddie;
 					
 					prestigeNow();
 				}
@@ -423,7 +442,7 @@ function addEventListeners(){
  function restart() {
 	 //On resurrect, increase HP to 3 + current stat points, hide resurrect button, show HP purchasing button and upgrade html.
 	
-	 currentHP = (3 + statPoints);
+	 currentHP = (3 + (statPoints * (1 + prestigesCount)));
 	 resurrectsCount++;
     /*currentAtk = 1;
 	 currentDef = 0;*/
@@ -452,6 +471,7 @@ function addEventListeners(){
 	 Atk.innerHTML = currentAtk;
 	 Def.innerHTML = currentDef;
 	 stats.innerHTML = statPoints;
+	 betterHealing.style.display = 'inline';
 	 //Reset image src
 	 images = document.getElementsByClassName("images");
 	 //console.log(images.length);console.log(imageList.length);
