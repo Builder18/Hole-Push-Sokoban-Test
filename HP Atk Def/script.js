@@ -11,7 +11,6 @@ var i;
 var image;
 var previousBaddie;
 
-
 //Variables that can change go here
 var currentHP = 3;
 var currentAtk = 1;
@@ -33,10 +32,14 @@ var statPointsGained = document.getElementById('statPointsGained');
 var resurrects = document.getElementById('resurrects');
 var prestiges = document.getElementById('prestiges');
 var betterHealing = document.getElementById('betterHealing');
+var betterDefence = document.getElementById('betterDefence');
+var betterAttack = document.getElementById('betterAttack');
 
 //Hiding elements that aren't needed in beginning
 restartButton.style.display = 'none';
 betterHealing.style.display = 'none';
+betterDefence.style.display = 'none';
+betterAttack.style.display = 'none';
 
 //Listeners and other code go here
 
@@ -105,7 +108,12 @@ function HPIncrease() {
 
 function AtkIncrease() {
 	if (statPoints < 2) return;
-	currentAtk++;
+	
+	if (prestigesCount < 11) {
+		currentAtk++;
+	} else {
+		currentAtk += 3;
+	}
 	Atk.innerHTML = currentAtk;
 	statPoints -= 2;
 	stats.innerHTML = statPoints;
@@ -113,7 +121,12 @@ function AtkIncrease() {
 
 function DefIncrease() {
 	if (statPoints < 3) return;
-	currentDef++;
+	
+	if (prestigesCount < 6) {
+		currentDef++;
+	} else {
+		currentDef += 2;
+	}
 	Def.innerHTML = currentDef;
 	statPoints -= 3;
 	stats.innerHTML = statPoints;
@@ -472,10 +485,12 @@ function addEventListeners(){
 	 Def.innerHTML = currentDef;
 	 stats.innerHTML = statPoints;
 	 betterHealing.style.display = 'inline';
+	 if (prestigesCount > 5) betterDefence.style.display = 'inline';
+	 if (prestigesCount > 10) betterAttack.style.display = 'inline';
 	 //Reset image src
 	 images = document.getElementsByClassName("images");
 	 //console.log(images.length);console.log(imageList.length);
-	 console.log(images);
+	 //console.log(images);
     for (i = 0; i < imageList.length; i++){
 		//Takes one of images from list.
 		image1 = imageList[i];
