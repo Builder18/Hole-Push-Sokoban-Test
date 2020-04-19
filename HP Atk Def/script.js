@@ -10,6 +10,7 @@ var images;
 var i;
 var image;
 var previousBaddie;
+var baddie4Found;
 
 //Variables that can change go here
 var currentHP = 3;
@@ -19,6 +20,7 @@ var statPoints = 0;
 var dead = 0;
 var resurrectsCount = 0;
 var prestigesCount = 0;
+var reverse = 0;
 
 //Elements go here
 var HP = document.getElementById('HP');
@@ -369,9 +371,13 @@ function addEventListeners(){
 			if (currentHP > 0) { 
 				statPoints += 15;
 				statPointsGained.innerHTML = 15;
-				console.log(previousBaddie);
+				//console.log(previousBaddie);
 				tmpSrc = 'baddie4.png';
+				if (previousBaddie === 0) {
+					alert("You won!");
+				}
 				image1 = previousBaddie;
+				previousBaddie = 0;
 				prestigeNow();
 				//console.log(resurrectsCount + " resurrects");
 			} else {
@@ -412,10 +418,14 @@ function addEventListeners(){
 				
 					//console.log(resurrectsCount + " resurrects");
 					
-					console.log(previousBaddie);
+					//console.log(previousBaddie);
 					
 					tmpSrc = 'baddie4.png';
+					if (previousBaddie === 0) {
+						alert("You won!");
+					}
 					image1 = previousBaddie;
+					previousBaddie = 0;
 					
 					prestigeNow();
 				}
@@ -498,6 +508,32 @@ function addEventListeners(){
 		//Change image
 		image2.setAttribute('src', image1);
    } //for i
+	//Hide all images after baddie4
+	//hideImages();
  }
  
- 
+ /*function hideImages() {
+	 //Finds all images and stores list of them.
+    images = document.getElementsByClassName("images");
+	 //Changes baddie4Found to 0
+	 baddie4Found = 0;
+	 //Loops through images, you could use break to get out of loop
+    for (i = 0; i < images.length; i++){
+		//Takes one of images from list.
+		image = images[i];
+		
+		//Check if we already have found baddie4.
+		if (baddie4Found === 0){
+			//If not, try to find baddie4.png
+			if (image.getAttribute('src') === 'baddie4.png') {
+				//baddie4.png was found!
+				baddie4Found = 1;
+			}
+			console.log(image);
+		} else {
+			//Hides all images after baddie4
+			image.style.display = 'none';
+		}
+		//console.log(i + " and " + image.getAttribute('src'));
+   } //for i
+ }*/
