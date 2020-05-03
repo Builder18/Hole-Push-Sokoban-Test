@@ -237,7 +237,7 @@ function ActivateSacrifice() {
 			gameData.sacrificeProgress = width;
 			gameData.currentTime -= gameData.sacrificeSeconds;
 			time.innerHTML = fancyTimeFormat(gameData.currentTime);
-			var tempTime = 100 * (1 + prestigesCount);
+			var tempTime = 100 * (1 + gameData.prestigesCount);
 			var tempHours = ~~(tempTime / 60);
 			btnActivateSacrifice.innerHTML = tempHours + " hours, " + ~~(tempTime - tempHours * 60) + " minutes"
 			elem.style.width = width + "%";
