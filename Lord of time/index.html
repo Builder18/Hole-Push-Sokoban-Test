@@ -2,9 +2,22 @@
 <html lang="en">
 <head>
 	<title>Lord of time incremental</title>
+	
+	<style>
+		#myProgress {
+			width: 100%;
+			background-color: #ddd;
+		}
+
+		#myBar {
+			width: 1%;
+			height: 30px;
+			background-color: #4CAF50;
+		}
+</style>
 </head>
 <body>
-	<!--Version:1.2-->
+	<!--Version:0.9-->
 	<h2>Game over in <span id="time">10</span> seconds!</h2>
 	
 	<button id="btnSand">Gather sand</button>
@@ -14,13 +27,31 @@
 	<div id="sandUpgrades">
 		<span id="gathererSpan"><span id="sandGatherers">0</span> <button id="btnSandGatherer">11 sand</button> Gathers 1 sand/second.</span>
 		
-		<span id="hourglassSpan">Hourglass: <button id="btnHourglass">900 sand</button> Multiplies sand gathered</span><br>
+		<span id="hourglassSpan"><span id="hourGlass">0</span> <button id="btnHourglass">900 sand</button> Multiplies sand gathered</span><br>
 		
-		<span id="timebenderSpan"><button id="btnTimeBender">??? sand</button> Converts sand into time slowly.</span>
+		<span id="timebenderSpan"><button id="btnTimeBender">9,999 sand</button> Converts sand into time slowly.</span>
+		
+		<span id="timemanipulatorSpan"><button id="btnTimeManipulator">99,999 sand</button>Converts sand into time.</span>
 		
 		<!--Add purpose for time once you have lots of it.-->
 		
-		<!--Also maybe another way to gain more time?-->
+		<div id="timesacrificeSpan">
+			<button id="btnActivateSacrifice">1 hour, 40 minutes</button> Kind of prestige, activates timewarping.<br><br>
+			
+			<div id="myProgress">
+				<div id="myBar"></div>
+			</div>
+		</div>
+	</div>
+	
+	<div id="prestigeUpgrades">
+		<span id="prestiges">0</span><br><br>
+		
+		<!--Upgrade to have 100 sand gatherers after prestige-->
+		
+		<!--Upgrade to have time bender after prestige-->
+		
+		Timewarp: ???
 	</div>
 	
 	<!--Keep script on here-->
