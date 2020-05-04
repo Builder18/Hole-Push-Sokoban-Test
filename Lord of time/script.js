@@ -1,5 +1,5 @@
 
-
+(function() {
 //Variables that can change go here
 var gameData = {
 	currentTime: 10,
@@ -18,10 +18,13 @@ var gameData = {
 	sacrificeSeconds: 60,
 };
 
+var benderTimeout;
+
 //No need to save these variables
-var ctime;
-var num;
+var ctime, num;
 var i = 0;
+var SandTimeout, TimeTimeout, SandGathererTimeout, HourglassTimeout, TimeBenderTimeout, TimeManipulatorTimeout, ActivateSacrificeTimeout;
+
 
 //Elements go here
 var time = document.getElementById('time');
@@ -193,6 +196,10 @@ function Hourglass() {
 }
 
 function TimeBender() {
+	/*var gameData = {
+		currentTime = gameData.currentTime,
+		currentSand = gameData.currentSand,
+	};*/
 	if (gameData.currentSand < 9999) return;
 	//If enough sand, enable time bender and hide it...
 	gameData.hasTimeBender = 1;
@@ -223,12 +230,19 @@ function ActivateSacrifice() {
     i = 1;
     var elem = document.getElementById("myBar");
     var width = 1;
+	 /*var gameData = {
+		sacrificeProgress = gameData.sacrificeProgress, 
+		sacrificeSeconds = gameData.sacrificeSeconds,
+		currentTime = gameData.currentTime,
+		prestigesCount = gameData.prestigesCount,
+	 };*/
     var id = setInterval(frame, 500);
     function frame() {
       if (width >= 100) {
         clearInterval(id);
 		  gameData.sacrificeProgress = 1;
 		  gameData.sacrificeSeconds += 60;
+		  elem.style.width = "1%";
 		  prestigeNow();
         i = 0;
       } else {
@@ -252,11 +266,11 @@ function prestigeNow() {
 	//console.log(gameData.prestigesCount);
 	prestiges.innerHTML = gameData.prestigesCount;
 	prestigeUpgrades.style.display = 'block';
-	 	gameData.currentTime = 10;
-		gameData.currentSand = 0;
+	 	gameData.currentTime = 20;
+		gameData.currentSand = 5000;
 		gameData.timeMultiplier = 1;
 		gameData.gathererPrice = 11;
-		gameData.currentSandGatherers = 30;
+		gameData.currentSandGatherers = 10;
 		gameData.currentHourglass = 0;
 		gameData.hasTimeBender = 0;
 		gameData.hasTimeManipulator = 0;
@@ -272,6 +286,9 @@ function prestigeNow() {
 	timebenderSpan.style.display = 'none';
 	timemanipulatorSpan.style.display = 'none';
 	btnSand.style.display = 'none';
+	gathererSpan.style.display = 'inline';
+	//Disable time bender
+	clearTimeout(benderTimeout);
 }
 
 function fancyTimeFormat(ctime)
@@ -307,7 +324,7 @@ function timeBenderLoop() {
 	time.innerHTML = fancyTimeFormat(gameData.currentTime);
 	sand.innerHTML = thousands_separators(gameData.currentSand);
 	//timeBenderLoop runs every three seconds
-	setTimeout(timeBenderLoop, gameData.timeBenderDelay);
+	benderTimeout = setTimeout(timeBenderLoop, gameData.timeBenderDelay);
 }
 
 //Game loop
@@ -329,3 +346,4 @@ function gameLoop() {
 }
 
 gameLoop();
+})();
