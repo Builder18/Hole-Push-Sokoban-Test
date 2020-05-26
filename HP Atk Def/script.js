@@ -127,7 +127,7 @@ function DefIncrease() {
 	if (prestigesCount < 6) {
 		currentDef++;
 	} else {
-		currentDef += 2;
+		currentDef += 5;
 	}
 	Def.innerHTML = currentDef;
 	statPoints -= 3;
@@ -235,6 +235,21 @@ function addEventListeners(){
 	 
 	 //This one checks for baddie2 instead
 	 if (tmpSrc === 'baddie2.png') {
+		if ((currentAtk / 2) > 2) {
+			 //Current attack divided with 2 is more than 2
+			 //console.log(currentAtk + " more than enough");
+				statPoints += 5;
+				statPointsGained.innerHTML = 5;
+				previousBaddie = image2;
+				//console.log(previousBaddie);
+				stats.innerHTML = statPoints;
+		 
+				tmpSrc = 'empty.png';
+				image2.setAttribute('src', image1.getAttribute('src'));
+				image1.setAttribute('src', tmpSrc);
+				return;
+		 }
+		 
 		if (currentDef < 3) {
 			currentHP -= (3 - currentDef);
 			HP.innerHTML = currentHP;
@@ -301,6 +316,21 @@ function addEventListeners(){
 	 
 	 //This one is for baddie3
 	 if (tmpSrc === 'baddie3.png') {
+		 if ((currentAtk / 2) > 5) {
+			 //Current attack divided with 2 is more than 5
+			 //console.log(currentAtk + " more than enough");
+				statPoints += 8;
+				statPointsGained.innerHTML = 8;
+				previousBaddie = image2;
+				//console.log(previousBaddie);
+				stats.innerHTML = statPoints;
+		 
+				tmpSrc = 'empty.png';
+				image2.setAttribute('src', image1.getAttribute('src'));
+				image1.setAttribute('src', tmpSrc);
+				return;
+		 }
+		 
 		 //Now we are starting to get serious. (Up to 11!)
 		 if (currentDef < 11) {
 			currentHP -= (11 - currentDef);
@@ -362,6 +392,24 @@ function addEventListeners(){
 	 
 	 //This one is for baddie4
 	 if (tmpSrc === 'baddie4.png') {
+		 if ((currentAtk / 2) > 8) {
+			 //Current attack divided with 2 is more than 8
+			 console.log(currentAtk + " more than enough");
+				statPoints += 15;
+				statPointsGained.innerHTML = 15;
+				//console.log(previousBaddie);
+				tmpSrc = 'baddie4.png';
+				if (previousBaddie === 0) {
+					alert("You won! Resurrects: " + resurrectsCount);
+				}
+				image1 = previousBaddie;
+				previousBaddie = 0;
+				prestigeNow();
+				image2.setAttribute('src', image1.getAttribute('src'));
+				image1.setAttribute('src', tmpSrc);
+				return;
+		 }
+		 
 		 if (currentDef < 20) {
 			currentHP -= (20 - currentDef);
 			HP.innerHTML = currentHP;
@@ -374,7 +422,7 @@ function addEventListeners(){
 				//console.log(previousBaddie);
 				tmpSrc = 'baddie4.png';
 				if (previousBaddie === 0) {
-					alert("You won!");
+					alert("You won! Resurrects: " + resurrectsCount);
 				}
 				image1 = previousBaddie;
 				previousBaddie = 0;
@@ -422,7 +470,7 @@ function addEventListeners(){
 					
 					tmpSrc = 'baddie4.png';
 					if (previousBaddie === 0) {
-						alert("You won!");
+						alert("You won! Resurrects: " + resurrectsCount);
 					}
 					image1 = previousBaddie;
 					previousBaddie = 0;
@@ -451,6 +499,8 @@ function addEventListeners(){
 		 } else {
 					statPoints += 3;
 					stats.innerHTML = statPoints;
+					currentHP = 0;
+					HP.innerHTML = currentHP;
 					console.log("RIP");
 					restartButton.style.display = 'inline';
 					HPButton.style.display = 'none';
