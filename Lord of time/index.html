@@ -2,36 +2,37 @@
 <html lang="en">
 <head>
 	<title>Lord of time incremental</title>
-	
-	<style>
-		#myProgress {
-			width: 100%;
-			background-color: #ddd;
-		}
-
-		#myBar {
-			width: 1%;
-			height: 30px;
-			background-color: #4CAF50;
-		}
-</style>
 </head>
 <body>
 	<!--Version:0.9-->
 	<h2>Game over in <span id="time">10</span> seconds!</h2>
 	
-	<button id="btnSand">Gather sand</button>
+	<div class="tooltip">
+		<button id="btnSand">Gather sand</button>
+		<span class="tooltiptext">Keep mouse over me to gather sand</span>
+	</div>
 	
-	Gain time: <button id="btnTime">10 sand</button> <span id="sand">0</span> sand<br><br>
+	<div class="tooltip2">
+		Gain time: <button id="btnTime">10 sand</button> <span id="sand">0</span> sand
+		<span class="tooltiptext2">Mouse-over works with most buttons</span>
+	</div><br><br>
 	
 	<div id="sandUpgrades">
-		<span id="gathererSpan"><span id="sandGatherers">0</span> <button id="btnSandGatherer">11 sand</button> Gathers 1 sand/second.</span>
+		<span id="gathererSpan"><span id="sandGatherers">0</span> <button id="btnSandGatherer">11 sand</button> Gathers 1 sand/second.</span><br>
 		
 		<span id="hourglassSpan"><span id="hourGlass">0</span> <button id="btnHourglass">900 sand</button> Multiplies sand gathered</span><br>
 		
 		<span id="timebenderSpan"><button id="btnTimeBender">9,999 sand</button> Converts sand into time slowly.</span>
 		
 		<span id="timemanipulatorSpan"><button id="btnTimeManipulator">99,999 sand</button>Converts sand into time.</span>
+		
+		<!--Buy/sell time to gain more of it-->
+		<div id="moneyUnlocked">
+			<h2><span id="money">0</span> money</h2><br><br>
+			
+			<!--Red or green arrow to show where price is going currently, then buttons to buy and sell time-->
+			
+		</div>
 		
 		<!--Add purpose for time once you have lots of it.-->
 		
@@ -45,16 +46,17 @@
 	</div>
 	
 	<div id="prestigeUpgrades">
-		<span id="prestiges">0</span><br><br>
+		<span id="prestiges">0</span> prestiges<br><br>
 		
 		<!--Upgrade to have 100 sand gatherers after prestige-->
 		
 		<!--Upgrade to have time bender after prestige-->
 		
-		Timewarp: ???
+		<!--Time-warp: ??? Increases generation of sand with random amount from 50 to 200 every second-->
 	</div>
 	
 	<!--Keep script on here-->
 	<script src="script.js"></script>
+	<link rel="stylesheet" type="text/css" href="stylesheet.css">
 </body>
 </html>

@@ -1,5 +1,7 @@
 
 (function() {
+	//Trying strict mode, remove if required
+	"use strict"
 //Variables that can change go here
 var gameData = {
 	currentTime: 10,
@@ -16,6 +18,7 @@ var gameData = {
 	sacrificeProgress: 1,
 	prestigesCount: 0,
 	sacrificeSeconds: 60,
+	currentMoney: 0
 };
 
 var benderTimeout;
@@ -24,7 +27,7 @@ var benderTimeout;
 var ctime, num;
 var i = 0;
 var SandTimeout, TimeTimeout, SandGathererTimeout, HourglassTimeout, TimeBenderTimeout, TimeManipulatorTimeout, ActivateSacrificeTimeout;
-
+var sandCost;
 
 //Elements go here
 var time = document.getElementById('time');
@@ -46,6 +49,8 @@ var btnActivateSacrifice = document.getElementById('btnActivateSacrifice');
 var prestiges = document.getElementById('prestiges');
 var prestigeUpgrades = document.getElementById('prestigeUpgrades');
 var hourGlass = document.getElementById('hourGlass');
+var moneyUnlocked = document.getElementById('moneyUnlocked');
+var money = document.getElementById('money');
 
 
 //Hiding elements that aren't needed in beginning
@@ -55,6 +60,7 @@ timebenderSpan.style.display = 'none';
 timemanipulatorSpan.style.display = 'none';
 timesacrificeSpan.style.display = 'none';
 prestigeUpgrades.style.display = 'none';
+moneyUnlocked.style.display = 'none';
 
 //Listeners and other code go here
 btnSand.addEventListener("mouseover", SandOver);
@@ -145,7 +151,7 @@ function ActivateSacrificeOut() {
 
 function SandIncrease() {
 	gameData.currentSand++;
-	sand.innerHTML = gameData.currentSand;
+	sand.textContent = gameData.currentSand;
 	if (gameData.currentSand === 11) {
 		if (gameData.hasSandUpgrade === 0) gameData.hasSandUpgrade = 1;
 		sandUpgrades.style.display = 'block';
@@ -157,12 +163,12 @@ function TimeIncrease() {
 	if (gameData.currentSand < (10 * gameData.timeMultiplier)) return;
 	//If we have enough sand, increase time with 5*timeMultiplier, decrease sand with 2*timeMultiplier and upgrade html for both of them.
 	gameData.currentTime += 5 * gameData.timeMultiplier;
-	time.innerHTML = 	fancyTimeFormat(gameData.currentTime);
+	time.textContent = 	fancyTimeFormat(gameData.currentTime);
 	gameData.currentSand -= 10 * gameData.timeMultiplier;
-	sand.innerHTML = thousands_separators(gameData.currentSand);
+	sand.textContent = thousands_separators(gameData.currentSand);
 	//Increase timeMultiplier and change button text
-	gameData.timeMultiplier++;
-	btnTime.innerHTML = (10 * gameData.timeMultiplier) + " sand";
+	gameData.timeMultiplier += 2;
+	btnTime.textContent = (10 * gameData.timeMultiplier) + " sand";
 }
 
 function SandGatherer() {
@@ -172,34 +178,31 @@ function SandGatherer() {
 	if (gameData.currentSandGatherers === 2) btnSand.style.display = 'none';
 	if (gameData.currentSandGatherers === 50) {
 		gameData.gathererPrice = 50;
-		btnSandGatherer.innerHTML = 50 + " sand";
-	}
-	if (gameData.currentSandGatherers === 100) {
-		gathererSpan.style.display = 'none';
+		btnSandGatherer.textContent = 50 + " sand";
 		hourglassSpan.style.display = 'inline';
 		timebenderSpan.style.display = 'inline';
 		if (gameData.hasSandUpgrade === 1) gameData.hasSandUpgrade = 2;
+	}
+	if (gameData.currentSandGatherers === 200) {
+		gathererSpan.style.display = 'none';
 	} 
-	sandGatherers.innerHTML = gameData.currentSandGatherers;
+	sandGatherers.textContent = gameData.currentSandGatherers;
 	gameData.currentSand -= gameData.gathererPrice;
-	sand.innerHTML = thousands_separators(gameData.currentSand);
+	sand.textContent = thousands_separators(gameData.currentSand);
 }
 
 function Hourglass() {
 	if (gameData.currentSand < 900 * (gameData.currentHourglass + 1)) return;
 	//If enough sand, increase sand gatherers with 1, decrease sand with 11 (this doesn't increase)
 	gameData.currentHourglass++;
-	hourGlass.innerHTML = gameData.currentHourglass;
+	hourGlass.textContent = gameData.currentHourglass;
 	gameData.currentSand -= 900 * gameData.currentHourglass;
-	sand.innerHTML = thousands_separators(gameData.currentSand);
-	btnHourglass.innerHTML = thousands_separators(900 * (gameData.currentHourglass + 1)) + " sand";
+	sand.textContent = thousands_separators(gameData.currentSand);
+	btnHourglass.textContent = 
+	thousands_separators(900 * (gameData.currentHourglass + 1)) + " sand";
 }
 
 function TimeBender() {
-	/*var gameData = {
-		currentTime = gameData.currentTime,
-		currentSand = gameData.currentSand,
-	};*/
 	if (gameData.currentSand < 9999) return;
 	//If enough sand, enable time bender and hide it...
 	gameData.hasTimeBender = 1;
@@ -209,7 +212,7 @@ function TimeBender() {
 	if (gameData.hasSandUpgrade === 2) gameData.hasSandUpgrade = 3;
 	//Reduce sand
 	gameData.currentSand -= 9999;
-	sand.innerHTML = gameData.currentSand;
+	sand.textContent = gameData.currentSand;
 	timeBenderLoop();
 }
 
@@ -221,7 +224,7 @@ function TimeManipulator() {
 		//timemanipulatorSpan.style.display = 'inline';
 		//if (gameData.hasSandUpgrade === 2) gameData.hasSandUpgrade = 3;
 	gameData.currentSand -= 99999;
-	sand.innerHTML = gameData.currentSand;
+	sand.textContent = gameData.currentSand;
 	gameData.timeBenderDelay = 1500;
 }
 
@@ -230,12 +233,6 @@ function ActivateSacrifice() {
     i = 1;
     var elem = document.getElementById("myBar");
     var width = 1;
-	 /*var gameData = {
-		sacrificeProgress = gameData.sacrificeProgress, 
-		sacrificeSeconds = gameData.sacrificeSeconds,
-		currentTime = gameData.currentTime,
-		prestigesCount = gameData.prestigesCount,
-	 };*/
     var id = setInterval(frame, 500);
     function frame() {
       if (width >= 100) {
@@ -250,10 +247,11 @@ function ActivateSacrifice() {
 			width++;
 			gameData.sacrificeProgress = width;
 			gameData.currentTime -= gameData.sacrificeSeconds;
-			time.innerHTML = fancyTimeFormat(gameData.currentTime);
+			time.textContent = fancyTimeFormat(gameData.currentTime);
 			var tempTime = 100 * (1 + gameData.prestigesCount);
 			var tempHours = ~~(tempTime / 60);
-			btnActivateSacrifice.innerHTML = tempHours + " hours, " + ~~(tempTime - tempHours * 60) + " minutes"
+			btnActivateSacrifice.textContent = 
+			tempHours + " hours, " + ~~(tempTime - tempHours * 60) + " minutes";
 			elem.style.width = width + "%";
       }
     }
@@ -264,31 +262,32 @@ function prestigeNow() {
 	//Increases prestigesCount, resets HTML and player variables.
 	gameData.prestigesCount++;
 	//console.log(gameData.prestigesCount);
-	prestiges.innerHTML = gameData.prestigesCount;
+	prestiges.textContent = gameData.prestigesCount;
 	prestigeUpgrades.style.display = 'block';
 	 	gameData.currentTime = 20;
-		gameData.currentSand = 5000;
-		gameData.timeMultiplier = 1;
+		gameData.currentSand = 5000 * gameData.prestigesCount;
+		//gameData.timeMultiplier = 1;
 		gameData.gathererPrice = 11;
 		gameData.currentSandGatherers = 10;
 		gameData.currentHourglass = 0;
 		gameData.hasTimeBender = 0;
 		gameData.hasTimeManipulator = 0;
-		gameData.hasTimeSacrifice = 0;
 		gameData.timeBenderDelay = 3000;
-	time.innerHTML = fancyTimeFormat(gameData.currentTime);
-	sand.innerHTML = gameData.currentSand;
-	btnSandGatherer.innerHTML = 11 + " sand";
-	sandGatherers.innerHTML = gameData.currentSandGatherers;
-	btnHourglass.innerHTML = 900 + " sand";
-	hourGlass.innerHTML = gameData.currentHourglass;
+	time.textContent = fancyTimeFormat(gameData.currentTime);
+	sand.textContent = gameData.currentSand;
+	btnSandGatherer.textContent = 11 + " sand";
+	sandGatherers.textContent = gameData.currentSandGatherers;
+	btnHourglass.textContent = 900 + " sand";
+	hourGlass.textContent = gameData.currentHourglass;
 	hourglassSpan.style.display = 'none';
 	timebenderSpan.style.display = 'none';
 	timemanipulatorSpan.style.display = 'none';
 	btnSand.style.display = 'none';
 	gathererSpan.style.display = 'inline';
 	//Disable time bender
-	clearTimeout(benderTimeout);
+	clearTimeout(benderTimeout);'
+	//Disable time sacrifice
+	clearInterval(id);
 }
 
 function fancyTimeFormat(ctime)
@@ -321,8 +320,8 @@ function thousands_separators(num)
 function timeBenderLoop() {
 	gameData.currentTime++;
 	gameData.currentSand -= 100;
-	time.innerHTML = fancyTimeFormat(gameData.currentTime);
-	sand.innerHTML = thousands_separators(gameData.currentSand);
+	time.textContent = fancyTimeFormat(gameData.currentTime);
+	sand.textContent = thousands_separators(gameData.currentSand);
 	//timeBenderLoop runs every three seconds
 	benderTimeout = setTimeout(timeBenderLoop, gameData.timeBenderDelay);
 }
@@ -330,16 +329,16 @@ function timeBenderLoop() {
 //Game loop
 function gameLoop() {
 	gameData.currentTime--;
-	time.innerHTML = fancyTimeFormat(gameData.currentTime);
-	//time.innerHTML = gameData.currentTime;
+	time.textContent = fancyTimeFormat(gameData.currentTime);
+	//time.textContent = gameData.currentTime;
 	gameData.currentSand += gameData.currentSandGatherers * (gameData.currentHourglass + 1);
-	sand.innerHTML = thousands_separators(gameData.currentSand);
+	sand.textContent = thousands_separators(gameData.currentSand);
 	//If time runs out, reset time, sand and HTML for them
 	if (gameData.currentTime < 1) {
 		gameData.currentTime = 10;
-		time.innerHTML = fancyTimeFormat(gameData.currentTime);
+		time.textContent = fancyTimeFormat(gameData.currentTime);
 		gameData.currentSand = 0;
-		sand.innerHTML = thousands_separators(gameData.currentSand);
+		sand.textContent = thousands_separators(gameData.currentSand);
 	}
 	//gameLoop runs every second
 	setTimeout(gameLoop, 1000);
