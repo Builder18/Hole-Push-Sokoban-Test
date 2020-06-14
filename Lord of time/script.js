@@ -286,8 +286,6 @@ function prestigeNow() {
 	gathererSpan.style.display = 'inline';
 	//Disable time bender
 	clearTimeout(benderTimeout);
-	//Disable time sacrifice
-	clearInterval(id);
 }
 
 function fancyTimeFormat(ctime)
