@@ -285,7 +285,7 @@ function prestigeNow() {
 	btnSand.style.display = 'none';
 	gathererSpan.style.display = 'inline';
 	//Disable time bender
-	clearTimeout(benderTimeout);'
+	clearTimeout(benderTimeout);
 	//Disable time sacrifice
 	clearInterval(id);
 }
