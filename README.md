@@ -8,3 +8,6 @@ https://builder18.github.io/HP%20Atk%20Def/index.html
 
 Lord of time, prototype incremental about having limited time: 
 https://builder18.github.io/Lord%20of%20time/index.html
+
+Trying polynomial growth
+https://builder18.github.io/Police%20corruption%20idle/index.html
