@@ -7,6 +7,7 @@ var gameData = {
 	corruptionIncrease: 1,
 	fullCorruption: 0,
 	increaseIncrease: 2,
+	currentPolicia: 0,
 };
 
 //Elements go here
@@ -14,6 +15,7 @@ var txtCorruption = document.getElementById('corruption');
 var fcorruption = document.getElementById('fullCorruption');
 var btnFasterCorruption = document.getElementById('fasterCorruption');
 var divFaster = document.getElementById('divFaster');
+var policiaButton = document.getElementById('policiaButton');
 
 //Hiding elements that aren't needed in beginning
 //sandUpgrades.style.display = 'none';
