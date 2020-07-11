@@ -1,0 +1,10 @@
+	div#withBackground {
+        background-image: url('policia-red.png');
+        background-repeat: no-repeat;
+		height: 500px;
+		width: 436px;
+    }
+	img.corrupt-badge {
+       height: 99%;
+    }
+	
