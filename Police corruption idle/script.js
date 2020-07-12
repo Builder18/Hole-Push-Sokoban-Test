@@ -11,6 +11,7 @@ var gameData = {
 };
 
 var temp = 55;
+var imageHeight = 55;
 
 //Elements go here
 var txtCorruption = document.getElementById('corruption');
@@ -18,7 +19,8 @@ var fcorruption = document.getElementById('fullCorruption');
 var btnFasterCorruption = document.getElementById('fasterCorruption');
 var divFaster = document.getElementById('divFaster');
 var policiaButton = document.getElementById('policiaButton');
-var policiaImage = document.getElementsByClassName('corrupt-badge');
+var policiaImage = document.getElementById('corrupt-badge');
+var policiaBottom = document.getElementById('bottom-policia');
 
 //Hiding elements that aren't needed in beginning
 //sandUpgrades.style.display = 'none';
@@ -43,16 +45,21 @@ function policiaCorruption() {
 	//console.log(temp);
 	gameData.currentPolicia -= 1*temp;
 	gameData.fullCorruption -= 10*temp;
+	console.log(gameData.currentPolicia);
 	fcorruption.textContent = thousands_separators(gameData.fullCorruption);
-	if (gameData.currentPolicia < 100) {
-		console.log(gameData.currentPolicia);
-		//policiaImage.style.height = gameData.currentPolicia + "%";
-		for (var i = 0; i < policiaImage.length; i++)
-			policiaImage[i].style.height = gameData.currentPolicia + "%";
+	if (gameData.currentPolicia > 49) {
+		imageHeight = Math.abs(50 - gameData.currentPolicia);
+		//console.log(imageHeight);
+		policiaBottom.style.height = imageHeight + "%";
+	} else { if (gameData.currentPolicia > 0) {
+		imageHeight = gameData.currentPolicia;
+		//console.log(imageHeight);
+		policiaImage.style.height = imageHeight + "%";
 	} else {
-		for (var i = 0; i < policiaImage.length; i++)
-			policiaImage[i].style.height = "100%";
-	}
+		policiaImage.style.height = "50%";
+		policiaBottom.style.height = "50%";
+		alert('You win!');
+	}}
 }
 
 //Utility function
