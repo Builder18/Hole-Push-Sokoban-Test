@@ -24,6 +24,9 @@ var m3Bar = document.getElementById('m3Bar');
 var m1Span = document.getElementById('m1Progress');
 var m2Span = document.getElementById('m2Progress');
 var m3Span = document.getElementById('m3Progress');
+var m1Idle = document.getElementById('m1Idle');
+var m2Idle = document.getElementById('m2Idle');
+var m3Idle = document.getElementById('m3Idle');
 
 //Hiding elements that aren't needed in beginning
 //m4Span.style.display = 'none';
@@ -37,18 +40,39 @@ m3Span.addEventListener("click", m3Increase);
 //Main functionality of buttons goes here
 
 function m1Increase() {
-	gameData.m1IncreaseVar++;
-	//console.log("m1 clicked!");
+	var random_boolean = Math.random() < 0.1;
+	if (random_boolean) {
+		gameData.m1IncreaseVar++;
+		m1Idle.textContent = gameData.m1IncreaseVar;
+	} else {
+		width++;
+		m1Bar.style.width = width + "%";
+	}
+	//console.log(random_boolean);
 }
 
 function m2Increase() {
-	gameData.m2IncreaseVar++;
-	//console.log("m2 clicked!");
+	var random_boolean = Math.random() < 0.1;
+	if (random_boolean) {
+		gameData.m2IncreaseVar++;
+		m2Idle.textContent = gameData.m2IncreaseVar;
+	} else {
+		width2++;
+		m2Bar.style.width = width2 + "%";
+	}
+	//console.log(random_boolean);
 }
 
 function m3Increase() {
-	gameData.m3IncreaseVar++;
-	//console.log("m3 clicked!");
+	var random_boolean = Math.random() < 0.1;
+	if (random_boolean) {
+		gameData.m3IncreaseVar++;
+		m3Idle.textContent = gameData.m3IncreaseVar;
+	} else {
+		width3++;
+		m3Bar.style.width = width3 + "%";
+	}
+	//console.log(random_boolean);
 }
 
 function fancyTimeFormat(ctime)
@@ -82,7 +106,8 @@ function gameLoop() {
 	//Progress bar for m1
 	
 	if (width >= 100) {
-		 gameData.m1IncreaseVar = 0;
+		 gameData.m1IncreaseVar++;
+		 m1Idle.textContent = gameData.m1IncreaseVar;
 		 gameData.currentProgress++;
 		 bigProgress.style.width = gameData.currentProgress + "%";
 		 m1Bar.style.width = "1%";
@@ -95,7 +120,8 @@ function gameLoop() {
 	//Once m1 is working, repeat this for m2 and m3
 	 
 	if (width2 >= 100) {
-		 gameData.m2IncreaseVar = 0;
+		 gameData.m2IncreaseVar++;
+		 m2Idle.textContent = gameData.m2IncreaseVar;
 		 gameData.currentProgress++;
 		 bigProgress.style.width = gameData.currentProgress + "%";
 		 m2Bar.style.width = "1%";
@@ -108,7 +134,8 @@ function gameLoop() {
 	 //And m3
 	 
 	 if (width3 >= 100) {
-		 gameData.m3IncreaseVar = 0;
+		 gameData.m3IncreaseVar++;
+		 m3Idle.textContent = gameData.m3IncreaseVar;
 		 gameData.currentProgress++;
 		 bigProgress.style.width = gameData.currentProgress + "%";
 		 m3Bar.style.width = "1%";
