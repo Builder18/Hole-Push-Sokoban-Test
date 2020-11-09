@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<title>HP Atk Def incremental</title>
+</head>
+<body onload="addEventListeners()">
+	<!--Version:1.2-->
+	
+	<img id="betterHealing" src="hp.png"> HP: <span id="HP">3</span> Cost: 1<button id="give-HP">Give HP</button> 
+	<!--Atk: <span id="Atk">1</span-->
+	<img id="betterDefence" src="def.png"> Def: <span id="Def">0</span> Cost: 2<button id="give-Def">Give Def</button> <br><br>
+	
+	Current stat points: <span id="stats">0</span> <button id="restart">Resurrect?</button>
+	
+	<br><br>
+	
+	<img src="hero.png" class="images"><img src="empty.png" class="images">
+	<img src="baddie1.png" class="images"><img src="empty.png" class="images">
+	<img src="baddie1.png" class="images"><img src="empty.png" class="images">
+	<img src="baddie1.png" class="images"><img src="empty.png" class="images">
+	<img src="baddie1.png" class="images"><img src="empty.png" class="images">
+	<img src="baddie2.png" class="images"><img src="empty.png" class="images"><br><br>
+	<img src="baddie1.png" class="images"><img src="empty.png" class="images">
+	<img src="baddie1.png" class="images"><img src="empty.png" class="images">
+	<img src="baddie2.png" class="images"><img src="empty.png" class="images">
+	<img src="baddie2.png" class="images"><img src="empty.png" class="images">
+	<img src="baddie2.png" class="images"><img src="empty.png" class="images">
+	<img src="baddie3.png" class="images"><img src="empty.png" class="images"><br><br>
+	<img src="baddie3.png" class="images"><img src="empty.png" class="images">
+	<img src="baddie2.png" class="images"><img src="empty.png" class="images">
+	<img src="baddie3.png" class="images"><img src="empty.png" class="images">
+	<img src="baddie2.png" class="images"><img src="empty.png" class="images">
+	<img src="baddie3.png" class="images"><img src="empty.png" class="images">
+	<img src="baddie4.png" class="images"><img src="empty.png" class="images">
+	
+	Last battle results: <span id="HPLost">1</span> HP was lost, <span id="statPointsGained">2</span> stat points were gained.<br><br>
+	
+	Prestiges done: <span id="prestiges">0</span> Resurrects so far: <span id="resurrects">0</span>
+
+	<br><br><br>
+	
+	Player has two buttons: HP and Def. (Health and Defence)<br>
+
+	Pressing one of the buttons increases that stat but you have limited points to assign.<br>
+	Alternatively you can keep your mouse over the button to auto-buy it.<br><br>
+	
+	Defeating enemies gives you stat points.<br>
+	<img src="baddie1.png"> Atk:2 Def:0<br>
+	<img src="baddie2.png"> Atk:5 Def:2<br>
+	<img src="baddie3.png"> Atk:9 Def:2<br>
+	<img src="baddie4.png"> Atk:15 Def:2<br><br>
+	
+	When stat symbols on top appear, it means that you gain more of that stat when using stat points to buy it.<br><br>
+	
+	For HP, it increases every prestige.
+	
+	For Def, it increases to 5.
+	
+	<!--Keep script on here-->
+	<script src="script.js"></script>
+</body>
+</html>
