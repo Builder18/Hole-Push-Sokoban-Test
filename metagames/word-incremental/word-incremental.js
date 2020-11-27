@@ -1,14 +1,16 @@
-(function() {
+//(function() {
 	//Trying strict mode, remove if required
-	"use strict"
+	//"use strict"
 //Variables that can change go here
 var gameData = {
 	currentWords: 1,
 	currentSentences: 0,
-	
+	stringVariable: "",
 };
 
 var ctime, num;
+var letter = "";
+var buttonDom;
 
 //Elements go here
 var sentenceSpan = document.getElementById('sentenceSpan');
@@ -23,7 +25,12 @@ var currentString = document.getElementById('currentString');
 
 //Main functionality of buttons goes here
 
-function letterClicked() {
+function letterClicked(letter, buttonDom) {
+	//console.log(buttonDom);
+	gameData.stringVariable += letter;
+	letter = "";
+	currentString.textContent = gameData.stringVariable;
+	buttonDom.disabled = true;
 	
 }
 
@@ -89,4 +96,8 @@ function gameLoop() {
 }
 
 gameLoop();
-})();
+//})();
+
+/*function testFunction(testVariable){
+	letterClicked(testVariable);
+}*/
