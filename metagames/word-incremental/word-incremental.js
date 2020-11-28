@@ -6,11 +6,16 @@ var gameData = {
 	currentWords: 1,
 	currentSentences: 0,
 	stringVariable: "",
+	foundWord: -1,
 };
 
 var ctime, num;
 var letter = "";
 var buttonDom;
+var wordArray = ['ASK', 'TUCK', 'TICK', 'SICK', 'SIT', 'TASK', 'EAT', 'EATS', 'EAST', 'TICKS', 'SEAT', 'STUCK', 'STICK', 'TUSK', 'SEA', 'CAT', 'CATS',
+'CAST', 'CASK', 'CUT', 'CUTS', 'CUTE', 'CUTIE', 'TAKE', 'SUCK', 'ICE', 'SITE'];
+var item, index;
+
 
 //Elements go here
 var sentenceSpan = document.getElementById('sentenceSpan');
@@ -31,10 +36,21 @@ function letterClicked(letter, buttonDom) {
 	letter = "";
 	currentString.textContent = gameData.stringVariable;
 	buttonDom.disabled = true;
-	
+	//I guess comparing stringVariable into word list/arrays would work?
+	wordArray.forEach(function(item, index, array) {
+		if(gameData.stringVariable === item){
+			console.log(item);
+			gameData.foundWord = index;
+		}
+	})
+	//Remove found word from array and call wordIncrease() function
+	if (gameData.foundWord > -1) {
+		wordArray.splice(gameData.foundWord, 1);
+		gameData.foundWord = -1;
+		console.log(wordArray);
+		wordIncrease();
+	}
 }
-
-//Still unsure how to make string with letters that you click on...
 
 function wordIncrease() {
 		if (gameData.currentWords > 100) {
@@ -43,8 +59,19 @@ function wordIncrease() {
 			gameData.currentWords = 0;
 			document.body.style.backgroundSize = "1%";
 		}
-		gameData.currentWords += 10;
+		gameData.currentWords++;
 		document.body.style.backgroundSize = gameData.currentWords + "%";
+		clearString();
+}
+
+function clearString() {
+	let temp = document.getElementsByClassName("letter");
+	let i;
+	for (i = 0; i < temp.length; i++) {
+		temp[i].disabled = false;
+	}
+	gameData.stringVariable = "";
+	currentString.textContent = "";
 }
 
 function fancyTimeFormat(ctime)

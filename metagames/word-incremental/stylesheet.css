@@ -30,6 +30,18 @@
 			-o-background-size: 1%;
 		}
 		
+		.letter {
+			cursor: pointer;
+		}
+		
+		.horizontical-center {
+			margin: 0;
+			position: absolute;
+			left: 50%;
+			-ms-transform: translateX(-50%);
+			transform: translateX(-50%);
+		}
+		
 /* Tooltip container */
 .tooltip {
 		position: relative;
