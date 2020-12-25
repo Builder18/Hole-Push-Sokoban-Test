@@ -14,26 +14,37 @@
 		<span class="horizontical-center"><button id="buttonLetters">Letters</button> 
 		<button id="buttonStats">Stats</button> <!--button id="buttonSettings">Settings</button--></span><br><br>
 		
-		<!--div id="myProgress" style="cursor: pointer">
-			<div id="myBar"></div>
-		</div-->
+		<div id="tabWithLetters">
+			<button class="letter" onclick="letterClicked(`E`, this)">E</button> <button class="letter" onclick="letterClicked(`A`, this)">A</button>
+			<button class="letter" onclick="letterClicked(`K`, this)">K</button> <button class="letter" onclick="letterClicked(`S`, this)">S</button><br>
+			<button class="letter" onclick="letterClicked(`C`, this)">C</button> <button class="letter" onclick="letterClicked(`I`, this)">I</button>
+			<button class="letter" onclick="letterClicked(`U`, this)">U</button> <button class="letter" onclick="letterClicked(`T`, this)">T</button>
+			
+			<div id="moreOne"> 
+			<br>--------------------<br>
+			<button class="letter" onclick="letterClickedTwo(`E`, this)">E</button> <button class="letter" onclick="letterClickedTwo(`A`, this)">A</button>
+			<button class="letter" onclick="letterClickedTwo(`N`, this)">N</button> <button class="letter" onclick="letterClickedTwo(`S`, this)">S</button><br>
+			<button class="letter" onclick="letterClickedTwo(`T`, this)">T</button> <button class="letter" onclick="letterClickedTwo(`I`, this)">I</button>
+			<button class="letter" onclick="letterClickedTwo(`R`, this)">R</button> <button class="letter" onclick="letterClickedTwo(`T`, this)">T</button><br></div>
 		
-		<button class="letter" onclick="letterClicked(`E`, this)">E</button> <button class="letter" onclick="letterClicked(`A`, this)">A</button><br>
-		<button class="letter" onclick="letterClicked(`K`, this)">K</button> <button class="letter" onclick="letterClicked(`S`, this)">S</button><br>
-		<button class="letter" onclick="letterClicked(`C`, this)">C</button> <button class="letter" onclick="letterClicked(`I`, this)">I</button><br>
-		<button class="letter" onclick="letterClicked(`U`, this)">U</button> <button class="letter" onclick="letterClicked(`T`, this)">T</button>
+			<br><br>
+			<span id="currentString"></span> --- <span id="currentStringTwo"></span><br>
+			
+			<button onclick="clearString()">Clear</button> <br><br>
 		
-		<br><br>
-		<span id="currentString"></span>
-		<button onclick="clearString()">Clear</button> <br><br>
+			Some ideas so far:<br>
 		
-		Some ideas so far:
-		
-		- Add word-producer into Stats tab.
-		
-		- 
+			- Add Found Words section? - Fix Autocorrect price not increasing correctly
 	
-		<br>Version: 0.2
+			<br>Version: 0.4</div>
+			
+		<div id="tabWithStats">
+			<h3>Words: <span id="wordSpan">1</span></h3>
+			
+			Autocorrect: <span id="autocorrectCount">0</span> 
+			<button id="buttonAutocorrect">30 words</button><br>
+			More letters: <button id="buttonMoreLetters">20 words</button>
+		</div>
 		
 		<!--Keep script on here-->
 		<script src="word-incremental.js"></script>
