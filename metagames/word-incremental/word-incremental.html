@@ -1,52 +1,67 @@
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 	<head>
-		<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
-		<meta content="utf-8" http-equiv="encoding">
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Word incremental</title>
 	</head>
 	<body>
 		<h3>Word incremental<br><br>
 		
-		Sentences: <span id="sentenceSpan">0</span></h3>
+		Sentences: <span id="sentenceSpan">0</span> Words: <span id="wordSpan">1</span></h3> 
+		
+		<button id="save">Save</button> <button id="load">Load</button><br><br>
 		
 		<span class="horizontical-center"><button id="buttonLetters">Letters</button> 
 		<button id="buttonStats">Stats</button> <!--button id="buttonSettings">Settings</button--></span><br><br>
 		
 		<div id="tabWithLetters">
-			<button class="letter" onclick="letterClicked(`E`, this)">E</button> <button class="letter" onclick="letterClicked(`A`, this)">A</button>
-			<button class="letter" onclick="letterClicked(`K`, this)">K</button> <button class="letter" onclick="letterClicked(`S`, this)">S</button><br>
-			<button class="letter" onclick="letterClicked(`C`, this)">C</button> <button class="letter" onclick="letterClicked(`I`, this)">I</button>
-			<button class="letter" onclick="letterClicked(`U`, this)">U</button> <button class="letter" onclick="letterClicked(`T`, this)">T</button>
+			<button class="letter" onclick="letterClicked(`e`, this)">E</button> <button class="letter" onclick="letterClicked(`a`, this)">A</button>
+			<button class="letter" onclick="letterClicked(`k`, this)">K</button> <button class="letter" onclick="letterClicked(`s`, this)">S</button><br>
+			<button class="letter" onclick="letterClicked(`c`, this)">C</button> <button class="letter" onclick="letterClicked(`i`, this)">I</button>
+			<button class="letter" onclick="letterClicked(`u`, this)">U</button> <button class="letter" onclick="letterClicked(`t`, this)">T</button>
 			
 			<div id="moreOne"> 
 			<br>--------------------<br>
-			<button class="letter" onclick="letterClickedTwo(`E`, this)">E</button> <button class="letter" onclick="letterClickedTwo(`A`, this)">A</button>
-			<button class="letter" onclick="letterClickedTwo(`N`, this)">N</button> <button class="letter" onclick="letterClickedTwo(`S`, this)">S</button><br>
-			<button class="letter" onclick="letterClickedTwo(`T`, this)">T</button> <button class="letter" onclick="letterClickedTwo(`I`, this)">I</button>
-			<button class="letter" onclick="letterClickedTwo(`R`, this)">R</button> <button class="letter" onclick="letterClickedTwo(`T`, this)">T</button><br></div>
+			<button class="letter" onclick="letterClickedTwo(`e`, this)">E</button> <button class="letter" onclick="letterClickedTwo(`a`, this)">A</button>
+			<button class="letter" onclick="letterClickedTwo(`n`, this)">N</button> <button class="letter" onclick="letterClickedTwo(`s`, this)">S</button><br>
+			<button class="letter" onclick="letterClickedTwo(`t`, this)">T</button> <button class="letter" onclick="letterClickedTwo(`i`, this)">I</button>
+			<button class="letter" onclick="letterClickedTwo(`r`, this)">R</button> <button class="letter" onclick="letterClickedTwo(`t`, this)">T</button><br></div>
 		
 			<br><br>
 			<span id="currentString"></span> --- <span id="currentStringTwo"></span><br>
 			
 			<button onclick="clearString()">Clear</button> <br><br>
-		
-			Some ideas so far:<br>
-		
-			- Add Found Words section? - Fix Autocorrect price not increasing correctly
+			
+			<p>Words found so far:</p><br>
+			<div id="foundWordsDiv">
+				
+			</div><br><br>
+			
+			<div id="foundWordsDivTwo">
+				
+			</div>
+			
+			<br><br>Some ideas so far:<br>
+			
+			- Keyboard event listeners!
+		</div>
 	
-			<br>Version: 0.4</div>
+		<br><p>Version: 0.54</p>
 			
 		<div id="tabWithStats">
-			<h3>Words: <span id="wordSpan">1</span></h3>
-			
 			Autocorrect: <span id="autocorrectCount">0</span> 
 			<button id="buttonAutocorrect">30 words</button><br>
-			More letters: <button id="buttonMoreLetters">20 words</button>
+			More letters: <button id="buttonMoreLetters">20 words</button> <button id="mlHelp" aria-label="info toggle" role="button" aria-pressed="false" class="info-button">i</button><br><br>
+			
+			<p id="mlInfo" aria-label="info description">
+				Gives you more letters to make words with. Price increases when purchased.
+			</p>
 		</div>
 		
 		<!--Keep script on here-->
+		<script src="wordlist.js"></script>
 		<script src="word-incremental.js"></script>
 		<link rel="stylesheet" type="text/css" href="stylesheet.css">
 	</body>
