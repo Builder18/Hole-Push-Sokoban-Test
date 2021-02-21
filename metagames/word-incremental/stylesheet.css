@@ -1,4 +1,19 @@
-#myProgress {
+		.info-button {
+			background-color:#75DAFF;
+			color:#131415;
+			width:35px;
+			height:35px;
+			border:solid 2px #131415;
+			border-radius:50%;
+			font-size:16px;
+			font-weight:bold;
+			display:inline-block;
+			margin-left:1em;
+			cursor:pointer;
+			outline:none;
+		}
+
+		#myProgress {
 			width: 100%;
 			height: 100%;
 			background-color: transparent;
@@ -24,10 +39,10 @@
 			background-position: center center;
 			background-repeat: no-repeat;
 			background-attachment: fixed;
-			background-size: 1%;
 			webkit-background-size: 1%;
 			-moz-background-size: 1%;
 			-o-background-size: 1%;
+			background-size: 1%;
 		}
 		
 		.letter {
