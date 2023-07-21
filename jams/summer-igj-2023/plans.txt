@@ -1,0 +1,27 @@
+
+
+Energy equals Matter
+
+Progress bar with 100% of energy.
+
+Matter counter.
+Button to convert 1% of energy to X amount of matter. (Starts at 1)
+
+Plans
+
+You slowly regain energy after using it.
+This can be improved with expensive generator upgrades.
+
+Main upgrade you buy with matter is matter efficiency augmentator.
+
+Augmentators increase your energy to matter efficiency with x2 each?
+
+
+
+Could also allow automated energy conversion to matter.
+
+Update:
+A la Crank style conversion that 
+doesn't need constant clicking, but you need to 
+click again when it's done prosessing the matter?
+
