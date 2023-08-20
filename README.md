@@ -1,5 +1,6 @@
 # Probably-games
 This repository will contain games.
+They are listed in release order, oldest first.
 
 Link to source code: https://github.com/Builder18/builder18.github.io
 
