@@ -8,7 +8,9 @@
 		btnButtons: document.querySelector("#btn-buttons"),
 		currentRewards: document.querySelector("#current-rewards"),
 		btnEffortTwo: document.querySelector("#btn-effort-two"),
-		btnEffortThree: document.querySelector("#btn-effort-three")
+		btnEffortThree: document.querySelector("#btn-effort-three"),
+		spanLaziness: document.querySelector("#span-laziness"),
+		spanLazinessText: document.querySelector("#laziness-text")
 	};
 	
 	let data = {
@@ -22,13 +24,18 @@
 		numButtonsCost: 5000,
 		numLastClick: 5,
 		numGainMax: 100,
-		numEffortButtons: 1
+		numEffortButtons: 1,
+		numLaziness: 0,
+		numLazinessIncrease: 1
 	};
+	
+	let textVisible = false;
 	
 	let lastUpdate = Date.now();
 	
 	elements.btnEffortTwo.style.display = 'none';
 	elements.btnEffortThree.style.display = 'none';
+	elements.spanLazinessText.style.display = 'none';
 	
 	elements.btnButtons.addEventListener('click', function(evt) {
 		if (data.numReward < data.numButtonsCost) return;
@@ -88,13 +95,11 @@
 	elements.btnReward.addEventListener('click', function(evt) {
 		if (data.numReward < data.numRewardCost) return;
 		
-		let increasedReward = Math.ceil(data.numGainMax * 1.1 / 100) * 100;
-		
-		data.numGainMax = increasedReward;
+		data.numGainMax = Math.ceil(data.numGainMax * 1.5 / 100) * 100;
 		data.numRewardGain = data.numGainMax;
 		
 		data.numReward -= data.numRewardCost;
-		data.numRewardCost *= 2;
+		data.numRewardCost *= 7;
 		
 		updateRewardText();
 		updateButtonReward();
@@ -102,7 +107,20 @@
 	
 	function effortClicked() {
 		data.numEffort += data.numEffortGain;
-		data.numLastClick++; // Looks like more effort buttons is gonna get valuable now...
+		data.numLastClick++; // Can make numLastClick quite large of a number.
+		
+		if (data.numEffort > 99) {
+			data.numReward += data.numRewardGain;
+			data.numGainMax += 100;
+			
+			data.numRewardGain = data.numGainMax;
+			
+			data.numEffort -= 100;
+			
+			updateRewardText();
+			
+			data.numLazinessIncrease++;
+		}
 		
 		if (data.numEffort > 99) {
 			data.numReward += data.numRewardGain;
@@ -114,7 +132,7 @@
 			
 			updateRewardText();
 			
-			//data.numLastClick = 5; // Seconds, even though it does decrease this if it's more as well...
+			data.numLazinessIncrease++;
 		}
 		
 		updateEffortText();
@@ -131,23 +149,34 @@
 	function updateRewardText() {
 		data.numPercentage = Math.floor(data.numRewardGain / data.numGainMax * 100);
 		
-		elements.spanReward.textContent = data.numRewardGain + " :";
+		elements.spanReward.textContent = formatThousands(data.numRewardGain) + " :";
 		elements.spanPercentage.textContent = data.numPercentage + "%";
-		elements.currentRewards.textContent = data.numReward;
+		elements.currentRewards.textContent = formatThousands(data.numReward);
 	}
 	
 	function updateBonusText() {
-		elements.btnBonus.textContent = data.numBonusCost + " reward";
+		elements.btnBonus.textContent = formatThousands(data.numBonusCost) + " reward";
 	}
 	
 	function updateButtonReward() {
-		elements.btnReward.textContent = data.numRewardCost + " reward";
+		elements.btnReward.textContent = formatThousands(data.numRewardCost) + " reward";
 	}
 	
 	function updateButtonsText() {
-		elements.btnButtons.textContent = data.numButtonsCost + " reward";
+		elements.btnButtons.textContent = formatThousands(data.numButtonsCost) + " reward";
 		
 		if (data.numEffortButtons === 3) elements.btnButtons.textContent = "Maxed out";
+	}
+	
+	function updateLazinessText() {
+		elements.spanLaziness.textContent = data.numLaziness;
+	}
+	
+	function formatThousands(num)
+	{
+		let num_parts = num.toString().split(".");
+		num_parts[0] = num_parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+		return num_parts.join(".");
 	}
 	
 	function gameLoop() {
@@ -165,7 +194,7 @@
 		lastUpdate = Date.now();
 		
 		let seconds = Math.floor(deltaTime / 1000);
-		let rewardTransfer = data.numEffort * seconds / 5;
+		let rewardTransfer = Math.ceil(data.numEffort * seconds / 5);
 		
 		if (data.numEffort === 0) rewardTransfer = 1;
 		
@@ -177,7 +206,7 @@
 		} else {
 			if (data.numRewardGain > 1) {
 				data.numReward += data.numRewardGain - 1;
-				data.numRewardGain -= data.numRewardGain - 1;
+				data.numRewardGain = 1;
 				
 				updateRewardText();
 			}
@@ -189,6 +218,28 @@
 			data.numLastClick--;
 		} else {
 			data.numEffort = 0;
+			
+			data.numLaziness += data.numLazinessIncrease;
+			
+			if (data.numLaziness > 9 && textVisible === false) {
+				elements.spanLazinessText.style.display = 'inline';
+				
+				textVisible = true;
+			}
+			
+			if (data.numLaziness > 99) {
+				data.numEffortGain--;
+				
+				data.numLaziness -= 100;
+			}
+			
+			if (data.numLaziness > 99) {
+				data.numEffortGain--;
+				
+				data.numLaziness = 0 + Math.ceil(data.numLazinessIncrease / 10);
+			}
+			
+			updateLazinessText();
 			updateEffortText();
 			
 			data.numLastClick = 5;
